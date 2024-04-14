@@ -119,13 +119,58 @@ select:focus{
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .shop-col-2{
+    padding-left: 25px;
     margin-top: 10px;
     width: 70%;
+    line-height: 50px;
 }
 .row-2{
     display: flex;
     flex-direction: row-reverse;
 }
+.single-product {
+    margin-top: 80px;
+}
+.single-product .shop-col-1{
+    padding: 0px;
+}
+.single-product .shop-col-1{
+    padding: 20px;
+}
+.single-product h4{
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+.single-product select{
+    display: block;
+    padding: 10px;
+    margin-top: 20px;
+}
+.single-product input{
+    width: 50px;
+    height: 40px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-right: 10px;
+    border: 1px solid red;
+}
+input:focus{
+    outline: none;
+}
+.button {
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: red;
+    border-radius: 30px;
+}
+
 
 /* footer */
 .footer {
@@ -166,5 +211,11 @@ select:focus{
     }
     .col-4{
         flex-basis: 100%;
+    }
+    .single-product .row{
+        text-align: left;
+    }
+    .single-product{
+        padding: 20px 0;
     }
 }
