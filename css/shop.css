@@ -5,27 +5,72 @@
 }
 
 /* navbar */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+header {
+    background-color: #f7c7e2; 
+    color: black;
+    padding: 20px 20px; 
+}
+
 .navbar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
 }
-nav {
-    flex: 1;
-    text-align: center;
+
+.logo img {
+    height: 60px;
 }
-nav ul{
-    display: inline-block;
-    list-style: none;
+
+.menu ul {
+    list-style-type: none;
+    display: flex;
 }
-nav ul li{
-    display: inline-block;
-    margin-right: 20px;
+
+.menu li {
+    padding: 0 15px;
+    position: relative; 
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    display: block; 
+}
+
+.menu li.submenu ul {
+    display: none;
+    position: absolute;
+    background-color: #f8c1e0;
+    padding: 10px;
+    list-style-type: none;
+    margin-top: 5px;
+    left: 0; 
+    min-width: 200px;
+}
+
+.menu li.submenu:hover > ul,
+.menu li.submenu ul:hover { 
+    display: block;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
 }
 /* body */
 .wallpaper{
-    background-color: rgb(243, 169, 215);
-    height: 200px;
+    background-color: #f7c7e2;
+    height: 150px;
     display: flex;
     flex-direction: column;
 }
@@ -64,7 +109,7 @@ nav ul li{
     margin: 0 auto 80px;
     position: relative;
     line-height: 60px;
-    color: bisque;
+    color: #f7c7e2;
 }
 h4 {
     color: #555;
@@ -80,7 +125,7 @@ ul{
     list-style-type: none;
 }
 select{
-    border: 1px solid #ff523b;
+    border: 1px solid #f7c7e2;
     padding: 5px;
 }
 select:focus{
@@ -129,13 +174,13 @@ select:focus{
 
 /* footer */
 .footer {
-    background: #000;
-    color: purple;
+    background:#f7c7e2;
+    color: black;
     font-size: 14px;
     padding: 60px 0 20px;
 }
 .footer p{
-    color: purple;
+    color: black;
 }
 .footer h3{
     color: #fff;
@@ -160,11 +205,30 @@ select:focus{
     flex-basis: 12%;
     text-align: center;
 }
+
+.container-footer {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.row-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+ul{
+    list-style-type: none;
+}
 @media only screen and (max-width: 600px) {
     .row {
         text-align: center;
     }
     .col-4{
         flex-basis: 100%;
+    }
+    .shop-container{
+        padding: 10%;
     }
 }

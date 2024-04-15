@@ -5,28 +5,67 @@
 }
 
 /* navbar */
-.row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
 }
+header {
+    background-color: #f7c7e2; 
+    color: black;
+    padding: 20px 20px; 
+}
+
 .navbar {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px;
 }
-nav {
-    flex: 1;
-    text-align: center;
+
+.logo img {
+    height: 60px;
 }
-nav ul{
-    display: inline-block;
-    list-style: none;
+
+.menu ul {
+    list-style-type: none;
+    display: flex;
 }
-nav ul li{
-    display: inline-block;
-    margin-right: 20px;
+
+.menu li {
+    padding: 0 15px;
+    position: relative; 
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    display: block; 
+}
+
+.menu li.submenu ul {
+    display: none;
+    position: absolute;
+    background-color: #f8c1e0;
+    padding: 10px;
+    list-style-type: none;
+    margin-top: 5px;
+    left: 0; 
+    min-width: 200px;
+}
+
+.menu li.submenu:hover > ul,
+.menu li.submenu ul:hover { 
+    display: block;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
 }
 /*  cart   */
 .container {
@@ -57,7 +96,7 @@ th{
     text-align: left;
     padding: 5px;
     color: white;
-    background: rgb(0, 204, 85);
+    background: #f8c1e0;
     font-weight: normal;
 }
 td{
@@ -69,7 +108,7 @@ td input{
     padding: 5px;
 }
 td a{
-    color: red;
+    color: black;
     font-size: 12px;
 }
 td img{
@@ -82,7 +121,7 @@ td img{
     justify-content: flex-end;
 }
 .total-price table{
-    border-top: 3px solid red;
+    border-top: 3px solid #f8c1e0;
     width: 100%;
     max-width: 350px;
 }
@@ -95,13 +134,13 @@ th:last-child{
 
 /*   footer   */
 .footer {
-    background: #000;
-    color: purple;
+    background:#f7c7e2;
+    color: black;
     font-size: 14px;
     padding: 60px 0 20px;
 }
 .footer p{
-    color: purple;
+    color: black;
 }
 .footer h3{
     color: #fff;
@@ -125,4 +164,20 @@ th:last-child{
 .footer-col-3, .footer-col-4{
     flex-basis: 12%;
     text-align: center;
+}
+
+.container-footer {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.row-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+ul{
+    list-style-type: none;
 }
