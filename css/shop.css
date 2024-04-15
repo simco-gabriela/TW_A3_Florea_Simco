@@ -24,7 +24,7 @@ nav ul li{
 }
 /* body */
 .wallpaper{
-    background-color: rgb(219, 217, 217);
+    background-color: rgb(243, 169, 215);
     height: 200px;
     display: flex;
     flex-direction: column;
