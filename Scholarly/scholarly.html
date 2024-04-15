@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Web Gardening Scholarly HTML</title>
+    <link rel="stylesheet" href="scholarly.css">
+    <link rel="icon" href="flower_icon_bar.png" type="image/x-icon">
+
+</head>
+
+<body>
+    <header>
+        <h1>Web Gardening</h1>
+    </header>
+
+    <div role="contentinfo">
+        <dl>
+            <dt>Autori</dt>
+            <dd>
+                Florea Florin-Cosmin, Simco Gabriela
+            </dd>
+        </dl>
+    </div>
+
+    <section>
+        <h2> Cuprins </h2>
+
+        <ul>
+            <li>
+                <a href="#1-introduction"> Introducere </a>
+
+                <ul>
+                    <li>
+                        <a href="#11-purpose"> 1.1 Scopul site-ului </a>
+                    </li>
+
+                    <li>
+                        <a href="#12-conventions"> 1.2 Convenții în document </a>
+                    </li>
+
+                    <li>
+                        <a href="#13-references"> 1.3 Bibliografie </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#2-description"> Descriere generală </a>
+
+                <ul>
+
+                    <li>
+                        <a href="#21-problem"> 2.1 Cerința problemei </a>
+                    </li>
+
+                    <li>
+                        <a href="#22-product-functions"> 2.2 Funcționalitățile produsului </a>
+                    </li>
+
+                    <li>
+                        <a href="#23-use-cases"> 2.3 Utilizatorii țintă și scenarii de utilizare</a>
+                    </li>
+
+                    <li>
+                        <a href="#24-technologies"> 2.4 Tehnologii folosite </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li>
+                <a href="#3-interface">Interfață</a>
+
+                <ul>
+                    <li>
+                        <a href="#31-viziune-generala"> 3.1 Viziune generală </a>
+                    </li>
+
+                    <li>
+                        <a href="#32-detaliere"> 3.2 Detaliere </a>
+                    </li>
+
+
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section id="1-introduction" role="doc-introduction">
+        <h2>1. Introducere</h2>
+
+
+        <section id="11-purpose">
+            <h3>1.1 Scopul site-ului</h3>
+            <p>
+                Scopul site-ului e de a crea un mediu online de vânzare si cumparare a florilor. Vânzătorii vor putea să
+                iși publice ofertele legate de flori,
+                să iși managerieze grădinile si să fie în contact cu potențiali cumpărători. Cumpărătorii vor putea să
+                își aleagă florile dorite având la dispoziție un magazin online
+                ce poate fi filtrat după dorințele acestora, vor putea intra pe pagina fiecarei grădini pentru a se
+                asigura de calitatea florilor și vor putea intra în contact cu vânzătorii
+                pentru a-și exprima interesul de a cumpăra produsul.
+            </p>
+        </section>
+        <section id="12-conventions">
+            <h3>1.2 Convenții în document </h3>
+            <p>
+                Titlurile de capitol, secțiunile și subsecțiunile sunt numerotate și reprezentate îngroșat pentru o
+                ușoară parcurgere a documentului conform machetei: IEEE System Requirements Specification Template.
+            </p>
+        </section>
+
+        <section id="13-references">
+
+            <h3>1.5 Bibliografie</h3>
+            <ol>
+                <li>
+                    <a href="https://w3c.github.io/scholarly-html">Scholarly HTML </a>
+                </li>
+            </ol>
+        </section>
+    </section>
+
+    <section id="2-description">
+        <h2>2. Descriere generală</h2>
+
+        <section id="21-problem">
+            <h3>2.1 Cerința problemei</h3>
+            <p>
+                Să se dezvolte o aplicație Web de tip asistent digital pentru cultivarea florilor de primăvară (lalele,
+                zambile, narcise etc.) și vânzarea lor.
+                Un utilizator va putea gestiona mai multe culturi concomitent. Astfel, aplicația va primi date de
+                interes de la o serie de senzori, precum umiditatea solului,
+                temperatură ambientală și un flux de imagini vizand dezvoltarea plantelor monitorizate. În funcție de
+                valorile senzorilor și perioada de creștere a plantei cultivate,
+                se dorește ca aplicația să sugereze acțiuni de irigare, ajustare a temperaturii si/sau luminozitatii,
+                recoltare. Pentru optimizarea procesului de vânzare, utilizatori
+                interesați de achiziționarea de flori își vor putea exprima interesul de achiziție și vor fi notificați
+                (via mesaje prin e-mail și notificări în cadrul unui browser Web)
+                când florile de interes sunt gata de achiziție. Momentul de recoltare/vânzare se va implementa pe baza
+                unei analize a ponderii culorilor din fluxul de imagini. Senzorii și
+                fluxul de imagini se vor genera printr-un serviciu Web adițional.
+            </p>
+        </section>
+        <section id="22-product-functions">
+            <h3>2.2 Funcționalitățile produsului</h3>
+            <ul>
+                <li>Permite monitorizarea culturilor de flori prin intermediul senzorilor plasați în acea grădină.</li>
+                <li>Sistem de recomandări pentru creșterea florilor bazat pe datele senzorilor.</li>
+                <li>Permite gestionarea vânzărilor și a cumpărărilor florilor din anumite grădini.</li>
+                <li>Permite crearea și gestionarea unui cont.</li>
+                <li>Scrierea și vizualizarea blogurilor.</li>
+                <li>Sistem de notificare pentru vânzări/culturile în creștere/noutăți.</li>
+                <li>Posibilitatea de a îregistra mai multe grădini cu setări personalizabile pentru fiecare cultură în
+                    parte
+                    (tip de floare, suprafața cultivată, tip de sol).</li>
+                <li>Sistem de urmărire anumite culturi sau persoane.</li>
+            </ul>
+
+        </section>
+
+        <section id="23-use-cases">
+            <h3>2.3 Utilizatorii țintă și scenarii de utilizare</h3>
+            <p>
+                Utilizatorii țintă pot fi atât persoanele pasionate de gradinărit, ce doresc să crească flori cât mai
+                frumoase și într-un mediu cât mai bun,
+                dar vor și să obțină un venit din asta, cât și persoanele obișnuite cărora le plac florile și vor să le
+                cumpere pentru diverse ocazii.
+            </p>
+            <p>
+                Scenarii de utilizare:
+            </p>
+            <ul>
+                <li>
+                    Un cultivator monitorizează datele oferite de senzorii gradinii printr-o interfață web,
+                    acesta primește recomandări de cultivare optima a florilor și poate da plantele spre vânzare.
+                    El primește notificare când un potențial cumpărător este interesat de flori ca să poată efectua o
+                    vânzare.
+                </li>
+                <li>
+                    Un potențial cumpărător folosește filtrele avansate ale site-ului pentru a selecta flori după tip,
+                    culoare, și disponibilitate imediată.
+                    El accesează profilurile multiple ale vânzătorilor pentru a compara ofertele. După ce alege un
+                    vânzător care pare să ofere cele mai bune condiții
+                    de calitate/preț, acesta inițiază o conversație directă prin platforma de mesagerie a site-ului
+                    pentru a negocia detaliile comenzi, inclusiv prețul și logistica livrării.
+                    Utilizatorul obține acces la o piață variată, poate evalua și verifica direct sursele florilor, și
+                    își simplifică procesul de achiziție prin negocieri directe și transparente.
+                </li>
+            </ul>
+        </section>
+
+        <section id="24-technologies">
+            <h3>2.4 Tehnologii Folosite</h3>
+            <li>
+                Frontend: HTML5, CSS, Javascript pentru interfața utilizator.
+            </li>
+            <li>
+                Backend: PHP, Javascript.
+            </li>
+            <li>
+                Baze de Date: MySQL pentru stocarea datelor.
+            </li>
+            <li>
+                API-uri: Utilizare de API-uri pentru integrarea cu senzori externi și pentru procesarea de imagini.
+            </li>
+        </section>
+    </section>
+
+    <section id="3-interface">
+        <h2>3. Interfață</h2>
+        <section id="31-viziune-generala">
+            <h3>3.1 Viziune generală</h3>
+            <img src="tabla1.jpg" alt="imagine tabla 1" style=" width: 80%;">
+            <img src="tabla2.jpg" alt="imagine tabla 2" style=" width: 80%;">
+            <p>
+                Privire de ansamblu a interfaței aplicației web. 
+                Acesta include miniaturi pentru fiecare secțiune majoră a aplicației: pagina principală, autentificare, bloguri, 
+                grădina mea, magazin, coș de cumpărături, lista de dorințe, profilul utilizatorului, inbox. 
+                <br>Fiecare pagină va avea un header, body și footer.  
+            </p>
+        </section>
+            <section id="32-detaliere">
+                <h3>3.2 Detaliere</h3>
+                <img src="headers.jpg" alt="headere" style="width:80%">
+                <p>În header se află: logo-ul și butoane, precum Home(pagina principală), About(documentul scholarly), Blog(pagina blogului),
+                    Shop(pagina shop-ului), Authentification/Profile(în funcție de starea utlizatorului: nelogat - primul header din imagine, 
+                    logat - al doilea header din imagine) și Cart(pagina cu coșul de cumpărături)</p>
+                <img src="footer.jpg" alt="footer" style="width:80%">
+                <p>Footer-ul conține informații de interes precum date de contact și altele.</p>
+                <img src="main-page.jpg" alt="pagina principală" style="width: 80%">
+                    <p>Pagina principală conține un mesaj de bun venit, secțiune de top sellers și secțiune de latest blogs.
+                        Dacă utlizatorul apasă pe un produs, atunci este redirecționat la pagina cu detalii a acelui produs.
+                        Dacă utilizatorul apasă pe un blog, atunci acesta este redirecționat respectiv la pagina acelui blog.
+                    </p> 
+                <img src="authentification.jpg" alt="imagine autentificare" style="width: 80%">
+                <p>Pagina de autentificare unde utilizatorul poate să intre în cont, precum și să își creeze unul. Acesta va fi nevoit să completeze un formular
+                    de autentificare care va conține adresa de e-mail și parola în cazul intrării în cont și în cazul creării contului va mai conține și 
+                    date precum nume și prenume.
+                </p>
+                <img src="blogs.jpg" alt="imagine pagina blogs" style="width: 80%">
+                <p>Pagina de blogs este o pagină cu articole listate, fiecare cu o imagine reprezentativă, un titlu, un autor, o dată a postării, tag-uri, o scurtă descriere și 
+                    butoane pentru citirea completă a articolului. De asemenea, pagina conține o secțiune pentru filtrare după anumite criterii și o secțiune pentru postări recente.
+                <br>Dacă utilizatorul apasă pe un articol, atunci acesta este redirecționat respectiv la pagina acelui articol(pagina din stânga imaginii). 
+                    Această pagină conține articolul complet și informațiile despre articol, precum și comentarii referitoare la acel articol. De asemenea, se găsește o 
+                    secțiune de alte articole recomandate.
+                </p>
+                <img src="shop.jpg" alt="imagine pagina shop" style="width: 80%">
+                <p>Pagina shop-ului conține o listă cu toate produsele valabile(cu denumire și preț) pe site ce pot fi sortate sau listate după anumite criterii.
+                    <br>Dacă utlizatorul apasă pe un produs, atunci este redirecționat la pagina produsului respectiv, unde poate vizualiza mai multe detalii cu privire la acesta,
+                    poate selecta o anumite cantine, îl poate adăuga în coș sau în wishlist, și poate vedea și alte produse recomandate de către site.
+                </p>
+                <img src="cart.jpg" alt="imagine pagina coș de cumpărături" style="width: 80%">
+                <p>Pagina constă dintr-o listă de produse salvate de către utilizator împreună cu prețul acestora, cantitatea și prețul total al coșului și un buton de cumpărare.
+                    <br>Dacă utilizatorul apasă pe butonul de cumpărare, acesta este redirecționat către o pagină(de jos) unde își introduce datele personale pentru a completa comanda.
+                </p>
+                <img src="acc-submenu.jpg" alt="imagine submenu cont" style="width: 80%">
+                <p>Dacă utilizatorul dă hover pe profil din navigation bar i se deschide un submenu cu mai multe butoane precum: account details(pagina de profil), my garden(pagina grădinii), 
+                    inbox(pagina inboxului), wishlist(pagina wishlist-ului), my blogs(pagina blogurilor personale) și logout(care deloghează utilizatorului).
+                </p>
+                <img src="acc-details.jpg" alt="imagine detalii cont" style="width: 80%">
+                <p>Pagină cu detalii personale ale utilizatorului, istoric de cumpărături și setări ale contului. </p>
+                <img src="my-garden.jpg" alt="imagine grădina mea" style="width: 80%">
+                <p>Pagina grădinii utilizatorului, includând zone diferite pentru tipurile de flori plantate, plus indicatoare(senzori) pentru starea de sănătate a plantelor și acțiuni recomandate.</p>
+                <img src="inbox.jpg" alt="imagine inbox" style="width: 80%">
+                <p>Pagină care conține totalitatea notificărilor primite structurată în o listă clară de notificări, fiecare cu titlu, descriere sumară și data primirii. 
+                    Dacă utilizatorul apasă pe una dintre notificări, acesta o poate vizualiza în integritate. Notificările pot fi despre alertări despre necesitățile de irigare și ajustări ale 
+                    condițiilor de mediu, disponibilitatea florilor pe care utilizatorul le are în wishlist, interesul manifestat de alți utilizatori pentru florile listate în grădină și notificări 
+                    privind reacțiile la postările de pe blog.</p>
+                <img src="wishlist.jpg" alt="imagine wishlist" style="width: 80%">
+                <p>Pagina wishlist-ului conține o colecție de produse favorite ale utilizatorului, precum și de persoane pe care utilizatorul le urmărește.</p>
+                <img src="my-blogs.jpg" alt="imagine pagina bloguri proprii" style="width: 80%">
+                <p>Pagina de bloguri personale include o secțiune pentru vizualizarea și editarea articolelor existente personale, completată de opțiuni pentru analiza interacțiunilor (like-uri și comentarii), 
+                    și o altă secțiune dedicată creării de articole noi. </p>
+                <img src="user-profile.jpg" alt="imagine pagina profilului altor utilizatori" style="width: 80%">
+                <p>Pagina de profil a altor utilizatori include trei secțiuni principale: informații personale, grădinile cultivate, și articolele publicate. 
+                    Aceasta permite vizualizarea detaliilor de bază ale utilizatorului, prezentarea grădinilor acestuia cu opțiuni de vizualizare a progresului plantelor, 
+                    și accesul la articolele scrise de utilizator. </p>
+
+
+
+
+
+
+
+            </section>
+    </section>
+</body>
+
+</html>
