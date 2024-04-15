@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeGa Product Detail</title>
+    <link rel="stylesheet" href="css/product-detail.css">
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logo_wega_2.jpg" alt="WeGa Logo">
+            </div>
+            <button class="hamburger" aria-expanded="false" aria-label="Toggle navigation">&#9776;</button>
+            <div class="menu">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li class="submenu">
+                        <a href="#myaccount">My Account &#9662;</a>
+                        <ul>
+                            <li><a href="acc-details.html">Account Details</a></li>
+                            <li><a href="my-garden.html">My Garden</a></li>
+                            <li><a href="wishlist.html">Wishlist</a></li>
+                            <li><a href="my-blogs.html">My Blogs</a></li>
+                            <li><a href="home.html">Logout</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="cart.html">Cart</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="wallpaper">
+        <h1>Product details</h1>
+    </div>
+
+    <div class="shop-container single-product">
+        <div class="shop-col-1">
+            <img src="images/flower-example.jpg" alt="flower-example">
+        </div>
+        <div class="shop-col-2">
+            <p>Home / Product</p>
+            <h1>Flower Product insert here</h1>
+            <h4>$100.00</h4>
+            <select>
+                <option>Select Size</option>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Big</option>
+            </select>
+            <h4>Select quantity</h4>
+            <input type="number" value="1">
+            <a class="button" href="">Add To Cart</a>
+            <h3>Product Details</h3>
+            <p>A lot of text that should be a described description descibing the describiede product</p>
+        </div>
+    </div>
+    <h2 style="text-align: center; font-size: 40px;">We also recommend</h2>
+    <div class="shop-container">
+        <div class="row">
+            <div class="col-4">
+                <img src="images/flower-example.jpg" alt="flower">
+                <h4>tbd</h4>
+                <p>100.00$</p>
+                <a href="product-detail.html">details..</a>
+            </div>
+            <div class="col-4">
+                <img src="images/flower-example.jpg" alt="flower">
+                <h4>tbd</h4>
+                <p>100.00$</p>
+                <a href="product-detail.html">details..</a>
+            </div>
+            <div class="col-4">
+                <img src="images/flower-example.jpg" alt="flower">
+                <h4>tbd</h4>
+                <p>100.00$</p>
+                <a href="product-detail.html">details..</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container-footer">
+            <div class="row-footer">
+                <div class="footer-col-1">
+                    <h3>&copy; 2024 Web Gardening. </h3>
+                    <p>All rights reserved.</p>
+                </div>
+                <div class="footer-col-2">
+                    <img src="images/logo_wega_2.jpg" alt="Wega logo">
+                    <p>SOMETHING SOMETHING SOMETHING</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <li>SOMETHING</li>
+                        <li>SOMETHING</li>
+                        <li>SOMETHING</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Florea Florin-Cosmin</li>
+                        <li>Simco Gabriela</li>
+                        <li>FII UAIC</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.menu');
+
+            hamburger.addEventListener('click', function () {
+                menu.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
