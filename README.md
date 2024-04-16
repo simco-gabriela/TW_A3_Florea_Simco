@@ -1,1 +1,1 @@
-Tehnologii Web - Proiect - 2A3 - Florea Florin Cosmin, Simco Gabriela
+Tehnologii Web - Proiect Web Gardening - 2A3 - Florea Florin Cosmin, Simco Gabriela
