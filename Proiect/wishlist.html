@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeGa Cart</title>
-    <link rel="stylesheet" href="css/cart.css">
+    <title>WeGa Wishlist</title>
+    <link rel="stylesheet" href="css/wishlist.css">
     <link rel="icon" href="images/flower_icon_bar.png">
 </head>
 
@@ -39,83 +39,42 @@
         </nav>
     </header>
 
-    <div class="small-container cart-page">
-        <table>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/flower-example.jpg" alt="flower">
-                        <div>
-                            <p>
-                                Some type of flower
-                            </p>
-                            <small>Price: $100.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$100.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/flower-example.jpg" alt="flower">
-                        <div>
-                            <p>
-                                Some type of flower
-                            </p>
-                            <small>Price: $100.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$100.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/flower-example.jpg" alt="flower">
-                        <div>
-                            <p>
-                                Some type of flower
-                            </p>
-                            <small>Price: $100.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$100.00</td>
-            </tr>
-        </table>
-        <div class="total-price">
-            <table>
-                <tr>
-                    <td>Subtotal</td>
-                    <td>$200.00</td>
-                </tr>
-                <tr>
-                    <td>Tax</td>
-                    <td>$200.00</td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>$400.00</td>
-                </tr>
-            </table>
+    <div class="wallpaper">
+        <h1>Your Wishlist</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <a href="product-detail.html">
+                    <img src="images/flower-example.jpg" alt="flower">
+                </a>
+                <h4>Flower Name</h4>
+                <p>$100.00</p>
+                <a class="button" href="wishlist.html">Add to Cart</a>
+                <a class="button remove" href="wishlist.html">Remove</a>
+            </div>
+            <div class="col-4">
+                <a href="product-detail.html">
+                    <img src="images/flower-example.jpg" alt="flower">
+                </a>
+                <h4>Flower Name</h4>
+                <p>$100.00</p>
+                <a class="button" href="wishlist.html">Add to Cart</a>
+                <a class="button remove" href="wishlist.html">Remove</a>
+            </div>
+            <div class="col-4">
+                <a href="product-detail.html">
+                    <img src="images/flower-example.jpg" alt="flower">
+                </a>
+                <h4>Flower Name</h4>
+                <p>$100.00</p>
+                <a class="button" href="wishlist.html">Add to Cart</a>
+                <a class="button remove" href="wishlist.html">Remove</a>
+            </div>
         </div>
     </div>
-    
+
     <div class="footer">
         <div class="container-footer">
             <div class="row-footer">
@@ -157,6 +116,5 @@
         });
     </script>
 </body>
-
 
 </html>

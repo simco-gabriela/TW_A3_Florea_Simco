@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeGa Cart</title>
-    <link rel="stylesheet" href="css/cart.css">
+    <title>WeGa Inbox</title>
+    <link rel="stylesheet" href="css/inbox.css">
     <link rel="icon" href="images/flower_icon_bar.png">
 </head>
 
@@ -27,11 +27,10 @@
                         <ul>
                             <li><a href="acc-details.html">Account Details</a></li>
                             <li><a href="my-garden.html">My Garden</a></li>
-                            <li><a href="inbox.html">Inbox</a></li>
                             <li><a href="wishlist.html">Wishlist</a></li>
                             <li><a href="my-blogs.html">My Blogs</a></li>
                             <li><a href="home.html">Logout</a></li>
-                        </ul>   
+                        </ul>
                     </li>
                     <li><a href="cart.html">Cart</a></li>
                 </ul>
@@ -39,83 +38,53 @@
         </nav>
     </header>
 
-    <div class="small-container cart-page">
+    <div class="inbox-container">
+        <h2>Inbox</h2>
         <table>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/flower-example.jpg" alt="flower">
-                        <div>
-                            <p>
-                                Some type of flower
-                            </p>
-                            <small>Price: $100.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$100.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/flower-example.jpg" alt="flower">
-                        <div>
-                            <p>
-                                Some type of flower
-                            </p>
-                            <small>Price: $100.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$100.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/flower-example.jpg" alt="flower">
-                        <div>
-                            <p>
-                                Some type of flower
-                            </p>
-                            <small>Price: $100.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$100.00</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>Subject</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>example@example.com</td>
+                    <td>Welcome to WeGa</td>
+                    <td>2024-06-20</td>
+                    <td><a href="message-detail.html">View</a></td>
+                </tr>
+                <tr>
+                    <td>support@wega.com</td>
+                    <td>Your Order Details</td>
+                    <td>2024-06-19</td>
+                    <td><a href="message-detail.html">View</a></td>
+                </tr>
+                <tr>
+                    <td>support@wega.com</td>
+                    <td>Your Order Details</td>
+                    <td>2024-06-19</td>
+                    <td><a href="message-detail.html">View</a></td>
+                </tr>
+                <tr>
+                    <td>support@wega.com</td>
+                    <td>Your Order Details</td>
+                    <td>2024-06-19</td>
+                    <td><a href="message-detail.html">View</a></td>
+                </tr>
+                <tr>
+                    <td>support@wega.com</td>
+                    <td>Your Order Details</td>
+                    <td>2024-06-19</td>
+                    <td><a href="message-detail.html">View</a></td>
+                </tr>
+                <!-- More rows as needed -->
+            </tbody>
         </table>
-        <div class="total-price">
-            <table>
-                <tr>
-                    <td>Subtotal</td>
-                    <td>$200.00</td>
-                </tr>
-                <tr>
-                    <td>Tax</td>
-                    <td>$200.00</td>
-                </tr>
-                <tr>
-                    <td>Total</td>
-                    <td>$400.00</td>
-                </tr>
-            </table>
-        </div>
     </div>
-    
+
     <div class="footer">
         <div class="container-footer">
             <div class="row-footer">
@@ -146,17 +115,17 @@
             </div>
         </div>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const hamburger = document.querySelector('.hamburger');
             const menu = document.querySelector('.menu');
-    
-            hamburger.addEventListener('click', function() {
+
+            hamburger.addEventListener('click', function () {
                 menu.classList.toggle('active');
             });
         });
     </script>
 </body>
-
 
 </html>
