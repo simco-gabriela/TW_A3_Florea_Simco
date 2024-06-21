@@ -4,7 +4,7 @@ class MariaDBConnection {
   static pool = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
-    password: '1234',
+    password: '2003',
     database: 'webgardening',
     waitForConnections: true,
     connectionLimit: 10,
