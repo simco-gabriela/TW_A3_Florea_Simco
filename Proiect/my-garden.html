@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My account - Web Gardening</title>
-    <link rel="stylesheet" href="css/acc-details.css">
+    <title>My Garden</title>
+    <link rel="stylesheet" href="css/my-garden.css">
     <link rel="icon" href="images/flower_icon_bar.png">
 </head>
 
@@ -29,8 +30,8 @@
                             <li><a href="inbox.html">Inbox</a></li>
                             <li><a href="wishlist.html">Wishlist</a></li>
                             <li><a href="my-blogs.html">My Blogs</a></li>
-                            <li><a href="home-not-logged.html">Logout</a></li>
-                        </ul>   
+                            <li><a href="home.html">Logout</a></li>
+                        </ul>
                     </li>
                     <li><a href="cart.html">Cart</a></li>
                 </ul>
@@ -38,50 +39,40 @@
         </nav>
     </header>
 
-    <div class="content-wrapper">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li class="active"><a href="#account-details">Account Details</a></li>
-                    <li><a href="#reviews">My reviews</a></li>
-                    <li><a href="#orders">My orders</a></li>
-                    <li><a href="#privacy">Confidentiality</a></li>
-                    <li><a href="#change-password">Change Password</a></li>
-                    <li><a href="#logout">Logout</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="account-details">
-            <div class="profile">
-                <div class="profile-image">
-                    <img src="images/profile-picture.png" alt="Profile Image">
-                    <a href="#" class="change-link">Change Profile Picture</a>
-                </div>
-                <div class="account-info">
-                    <div class="info">
-                        <h2>Cosmin Florin</h2>
-                        <a href="#" class="change-link">Change Name</a>
-                    </div>
-                    <div class="info">
-                        <p>Email: cosminflorin12@gmail.com</p>
-                        <a href="#" class="change-link">Change Email</a>
-                    </div>
-                    <div class="info">
-                        <p>Username: EpicFace</p>
-                        <a href="#" class="change-link">Change Username</a>
-                    </div> 
-                    <div class="info">
-                        <p>Date of Birth: January 1, 1980</p>
-                        <a href="#" class="change-link">Change Date of Birth</a>
-                    </div>
-                    <div class="info">
-                        <p>Address: 123 Floral Street, Petal City</p>
-                        <a href="#" class="change-link">Change Address</a>
-                    </div>
-                </div>
+    <div class="my-garden-container">
+        <div class="garden-header">
+            <h1>My Garden</h1>
+        </div>
+        <div class="garden-main">
+            <div class="garden-image">
+                <img src="images/flower-example.jpg" alt="Garden Image">
             </div>
-        </main>
+            <div class="garden-text">
+                <h2>Welcome to Your Garden</h2>
+                <p>This is where you can manage and view all the details of your personal garden. Keep track of your plants, sensors, and more.</p>
+                <p>Enjoy nurturing your green space and making it flourish!</p>
+                <a href="shop.html" class="shop-button">Shop for More Plants</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="sensors-container">
+        <div class="sensor-panel">
+            <h4>Sensor 1</h4>
+            <p>Details about Sensor 1</p>
+        </div>
+        <div class="sensor-panel">
+            <h4>Sensor 2</h4>
+            <p>Details about Sensor 2</p>
+        </div>
+        <div class="sensor-panel">
+            <h4>Sensor 3</h4>
+            <p>Details about Sensor 3</p>
+        </div>
+        <div class="sensor-panel">
+            <h4>Sensor 4</h4>
+            <p>Details about Sensor 4</p>
+        </div>
     </div>
 
     <div class="footer">
@@ -92,13 +83,12 @@
                     <p>All rights reserved.</p>
                 </div>
                 <div class="footer-col-2">
-                    <img src="images/logo_wega_2.jpg" alt="logo wega">
+                    <img src="images/logo_wega_2.jpg" alt="WeGa logo">
                     <p>SOMETHING SOMETHING SOMETHING</p>
                 </div>
                 <div class="footer-col-3">
                     <h3>Useful links</h3>
                     <ul>
-                        <li>SOMETHING</li>
                         <li>SOMETHING</li>
                         <li>SOMETHING</li>
                         <li>SOMETHING</li>
@@ -115,16 +105,17 @@
             </div>
         </div>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const hamburger = document.querySelector('.hamburger');
             const menu = document.querySelector('.menu');
-    
-            hamburger.addEventListener('click', function() {
+
+            hamburger.addEventListener('click', function () {
                 menu.classList.toggle('active');
             });
         });
     </script>
-
 </body>
+
 </html>
