@@ -124,7 +124,7 @@ header {
     color: white;
 }
 
-.account-details {
+.content-area {
     flex: 1;
     padding: 20px;
     max-width: 800px;
@@ -174,6 +174,7 @@ header {
     flex-grow: 1;
 }
 
+
 .form-row {
     margin-bottom: 15px;
 }
@@ -189,6 +190,139 @@ header {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+.review {
+    display: flex;
+    align-items: flex-start; 
+    margin-bottom: 20px;
+}
+.product-image {
+    width: 100px; 
+    height: 100px; 
+    object-fit: cover; 
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.review-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.review h3 {
+    margin: 0 0 5px 0;
+}
+
+.star-rating {
+    color: #e2a400;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.review-comment {
+    color: #666;
+    font-size: 14px;
+}
+
+.order {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.order-images {
+    position: relative; 
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+.order-image {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.more-images-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.order-details {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.order h3, .order p, .order a {
+    margin-bottom: 5px;
+}
+
+.order a {
+    color: #f57da3;
+    text-decoration: none;
+}
+
+
+.order h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+}
+
+.order p {
+    margin: 2px 0; 
+    font-size: 16px;
+    color: #333;
+}
+
+.order a {
+    margin-top: 10px;
+    color: #f57da3;
+    text-decoration: none;
+}
+
+.form-checkbox {
+    margin: 20px 0;
+}
+
+.form-checkbox label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.form-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+
+.form-row1 {
+    margin-bottom: 15px;
+}
+
+.form-row1 label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-row1 input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
 
 .footer {
     background: #f7c7e2;
@@ -331,4 +465,17 @@ header {
         display: block;
     }
 
+    .reviews-container {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .review {
+        flex-direction: column;
+        align-items: flex-start; 
+    }
+
+    .product-image {
+        margin-bottom: 10px; 
+    }
 }
