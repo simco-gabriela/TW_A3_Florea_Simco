@@ -1,0 +1,360 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+
+header {
+    background-color: #f7c7e2;
+    color: black;
+    padding: 20px 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 60px;
+}
+
+.menu ul {
+    list-style-type: none;
+    display: flex;
+}
+
+.menu li {
+    padding: 0 15px;
+    position: relative;
+}
+
+.menu li a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.menu li.submenu ul {
+    display: none;
+    position: absolute;
+    background-color: #ffd1fa;
+    padding: 10px;
+    list-style-type: none;
+    margin-top: 5px;
+    left: 0;
+    min-width: 200px;
+}
+
+.menu li.submenu:hover > ul,
+.menu li.submenu ul:hover {
+    display: block;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+.blog-container {
+    display: flex;
+    justify-content: center;
+    max-width: 1300px;
+    margin: 20px auto;
+}
+.blog-post {
+    flex: 2;
+    max-width: 800px;
+    margin-right: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+}
+.blog-post img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 15px; /* Center image and add margin */
+
+}
+
+.blog-post .content {
+    margin-top: 10px;
+    overflow: hidden; /* Ensures text wraps around the image */
+}
+
+.blog-post .content h2 {
+    font-size: 2rem; 
+    margin-top: 0;
+}
+
+.blog-post .content .meta {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.blog-post .content .tags {
+    margin-bottom: 10px;
+}
+
+.blog-post .content .tags span {
+    background: #f9ebf5;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.blog-post .content .author {
+    color: #333;
+    font-weight: bold;
+}
+
+.blog-post .content p {
+    margin: 10px 0;
+}
+
+.blog-post .likes {
+    color: #666;
+}
+
+.comments {
+    margin-top: 20px;
+    border-top: 1px solid #c3c0c0; /* Light border */
+    padding-top: 20px;
+}
+
+.comment {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.comment .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.comment .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comment .comment-content {
+    flex: 1;
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow */
+    padding: 10px;
+    border-radius: 8px; /* Rounded corners */
+}
+
+.comment .comment-content .comment-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment .comment-content .comment-text {
+    color: #333;
+}
+
+.recommended-blogs {
+    flex: 1;
+    max-width: 300px;
+    padding: 20px;
+    border: 1px solid #ddd; 
+    background-color: #fff; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    box-sizing: border-box;
+    display: flex; 
+    flex-direction: column; 
+    height: fit-content;
+    max-height: max-content; 
+    overflow: hidden;
+}
+
+.recommended-blogs .recommended-blog .title {
+    font-weight: bold; 
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+
+.recommended-blogs h3 {
+    font-size: 1.2rem;
+    margin-top: 0;
+    border-bottom: 1px solid #ddd; /* Light border */
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.recommended-blog {
+    margin-bottom: 20px;
+}
+
+.recommended-blog .blog-details {
+    display: flex;
+    align-items: center;
+}
+
+.recommended-blog .blog-details img {
+    width: 90px; 
+    height: auto;
+    margin-right: 10px;
+}
+
+.recommended-blog .blog-details .details {
+    flex: 1;
+}
+
+.recommended-blog .blog-details .details .title {
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.recommended-blog .blog-details .details .title:hover {
+    text-decoration: underline;
+}
+
+.recommended-blog .blog-details .details .author {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.footer {
+    background: #f7c7e2;
+    color: black;
+    font-size: 14px;
+    padding: 60px 0 20px;
+}
+
+.footer p {
+    color: black;
+}
+
+.footer h3 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.footer-col-1,
+.footer-col-2,
+.footer-col-3,
+.footer-col-4 {
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footer-col-1 {
+    flex-basis: 30%;
+}
+
+.footer-col-2 {
+    flex: 1;
+    text-align: center;
+}
+
+.footer-col-2 img {
+    width: 180px;
+    margin-bottom: 20px;
+}
+
+.footer-col-3,
+.footer-col-4 {
+    flex-basis: 12%;
+    text-align: center;
+}
+
+.container-footer {
+    max-width: 1300px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.row-footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+@media (max-width: 1024px) {
+    .logo img {
+        height: 50px;
+    }
+
+    .blog-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .blog-post {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .recommended-blogs {
+        max-width: 100%;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu.active {
+        display: flex;
+        position: absolute;
+        background-color: #f9ebf5;
+        top: 60px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    .menu ul {
+        flex-direction: column;
+    }
+
+    .menu li {
+        text-align: center;
+        padding: 10px 0;
+        width: 100%;
+        border-bottom: 1px solid #7f8c8d;
+    }
+
+    .menu li:last-child {
+        border-bottom: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+}
