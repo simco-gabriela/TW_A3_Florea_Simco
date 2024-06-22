@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loadHTML('footer.html', 'footer', setupHamburgerMenu);
         loadHTML('navbar.html', 'navbar', setupHamburgerMenu);
     }
+    
     initialize();
 });
 

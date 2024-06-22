@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <link rel="stylesheet" href="css/blog-create.css">
+    <link rel="icon" href="images/flower_icon_bar.png">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="blog-container">
+        <div class="blog-title">
+            <input type="text" id="blogTitle" placeholder="Enter your blog title...">
+        </div>
+        <div class="blog-image">
+            <p>Add an image</p>
+            <input type="file" id="blogImage" accept="image/*">
+        </div>
+        <div class="blog-post">
+            <form id="blogForm">
+                <textarea id="blogContent" placeholder="Write your blog post here..."></textarea>
+                <a href="my-blogs.html" class="postButton">Post</a>
+            </form>
+        </div>
+        <div class="blog-tags">
+            <input type="text" id="blogTags" placeholder="Enter tags (comma separated)...">
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script src="js/navbar_and_footer.js"></script>
+</body>
+</html>

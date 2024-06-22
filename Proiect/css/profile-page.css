@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+.profile-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upper-section {
+    display: flex;
+    padding: 20px;
+    margin: 10px;
+    position: relative;
+}
+
+.avatar img {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.description-section {
+    padding: 10px;
+    margin: 20px;
+}
+
+.personal-info {
+    text-align: center;
+}
+
+.personal-info h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.personal-info .description {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.container {
+    text-align: center;
+    padding: 50px 0;
+    background: #fff1fc;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.container .products,
+.container .posts {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.container article {
+    width: 300px;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.container article img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.container article .product-info,
+.container article .blog-content {
+    padding: 0 15px;
+}
+
+.container article .product-info h3,
+.container article .blog-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.container article .product-info p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.container article button,
+.container article .blog-content button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.container article button:hover,
+.container article .blog-content button:hover {
+    background-color: #555;
+}
+
+.see-more {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto;
+}
+
+@media (max-width: 1024px) {
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .upper-section,
+    .description-section {
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+    }
+
+    .avatar img {
+        max-width: 100%;
+    }
+
+    .container article {
+        width: 100%;
+    }
+}

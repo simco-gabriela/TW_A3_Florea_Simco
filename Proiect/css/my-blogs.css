@@ -1,0 +1,162 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    position: relative;
+    left: 15%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 65%;
+}
+
+.search-bar {
+    padding: 10px;
+    width: 60%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+.create-blog-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.create-blog-btn:hover {
+    background-color: #0056b3;
+}
+
+.create-blog-btn-right {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+    z-index: 999;
+}
+
+.create-blog-btn-right:hover {
+    background-color: #0056b3;
+}
+
+.main-content {
+    width: 65%;
+}
+
+.blog-post {
+    background-color: #fff;
+    display: flex;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.blog-post img {
+    width: 30%;
+    margin-right: 20px;
+}
+
+.blog-post-content {
+    width: 70%;
+}
+
+.blog-post-title {
+    font-size: 24px;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.blog-post-meta {
+    color: #999;
+    margin: 0 0 10px;
+}
+
+.blog-post-tags {
+    color: #555;
+    margin: 0 0 10px;
+}
+
+.blog-post-desc {
+    margin: 0 0 10px;
+}
+
+.read-more-btn {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.read-more-btn:hover {
+    background-color: #449d44;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        left: 0; 
+    }
+
+    .header {
+        width: 95%;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .create-blog-btn {
+        width: 100%;
+    }
+
+    .create-blog-btn-right {
+        position: static;
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+    .blog-post {
+        flex-direction: column; /* Stack posts vertically on smaller screens */
+    }
+
+    .blog-post img {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px; /* Reduce margin between posts */
+    }
+
+    .blog-post-content {
+        width: 100%;
+    }
+}
