@@ -9,61 +9,6 @@ body {
     overflow-x: hidden; 
 }
 
-header {
-    background-color: transparent;
-    color: black;
-    padding: 20px 20px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    transition: background-color 0.3s ease-out;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo img {
-    height: 60px; 
-}
-
-.menu {
-    display: flex;
-}
-
-.menu ul {
-    list-style-type: none;
-    display: flex;
-    padding: 0;
-    align-items: center;
-}
-
-.menu li {
-    padding: 0 15px;
-    position: relative;
-}
-
-.menu li a {
-    color: black; 
-    text-decoration: none;
-}
-
-.hamburger {
-    display: none; 
-    background: none;
-    border: none;
-    color: black;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-header.scrolled {
-    background-color: #f7c7e2; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
 .hero {
     position: relative;
     height: 100vh;
@@ -227,73 +172,11 @@ article {
     position: relative; 
 }
 
-.footer {
-    background:#f7c7e2;
-    color: black;
-    font-size: 14px;
-    padding: 60px 0 20px;
-}
-.footer p{
-    color: black;
-}
-.footer h3{
-    color: #fff;
-    margin-bottom:20px;
-}
-.footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4 {
-    min-width: 250px;
-    margin-bottom: 20px;
-}
-.footer-col-1 {
-    flex-basis: 30%;
-}
-.footer-col-2 {
-    flex: 1;
-    text-align: center;
-}
-.footer-col-2 img {
-    width: 180px;
-    margin-bottom: 20px;
-}
-.footer-col-3, .footer-col-4{
-    flex-basis: 12%;
-    text-align: center;
-}
-
-.container-footer {
-    max-width: 1300px;
-    margin: auto;
-    padding-left: 25px;
-    padding-right: 25px;
-}
-.row-footer {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
 ul{
     list-style-type: none;
 } 
 
 @media (max-width: 768px) {
-    .hamburger {
-        display: block;
-    }
-
-    .menu {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .menu ul {
-        flex-direction: column;
-    }
-
-    .menu.active {
-        display: flex; 
-    }
       #shop .container, #blog .container {
         flex-direction: column;
         align-items: center;
