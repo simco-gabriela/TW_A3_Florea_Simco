@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeGa Store</title>
     <link rel="stylesheet" href="css/shop.css">
-    <link rel="icon" href="images/flower_icon_bar.png">
+
 </head>
 
 <body>
@@ -42,113 +42,155 @@
         <h1>SHOP</h1>
     </div>
 
+
+    
     <div class="shop-container">
         <div class="shop-col-1">
-                <h3>Categories</h3>
-                    <input type="checkbox" id="Categ1">
-                    <label for="Categ1"> Jasmine</label><br>
-                    <input type="checkbox" id="Categ2">
-                    <label for="Categ2"> Orchid</label><br>
-                    <input type="checkbox" id="Categ3">
-                    <label for="Categ3"> Rose</label><br><br>
+            <form action="/filter" method="GET">
+                <div class="row-2">
+                    <select name="sort">
+                        <option value="default">Default Sorting</option>
+                        <option value="price_asc">Sort by price ascending</option>
+                        <option value="price_desc">Sort by price descending</option>
+                        <option value="rating">Sort by rating</option>
+                        <option value="popularity">Sort by popularity</option>
+                    </select>
+                </div>
+                <div class="checkbox-container">
                 <h3>Type</h3>
-                    <input type="checkbox" id="Type1">
-                    <label for="Type1"> Bouchet</label><br>
-                    <input type="checkbox" id="Type2">
-                    <label for="Type2"> SOMETHING</label><br>
-                    <input type="checkbox" id="Type3">
-                    <label for="Type3"> SOMETHING</label><br><br>
+                    <input type="checkbox" id="Type1" name="type" value="Bluebell" >
+                    <label for="Type1"> Bluebell</label><br>
+                    <input type="checkbox" id="Type2" name="type" value="Iris">
+                    <label for="Type2"> Iris</label><br>
+                    <input type="checkbox" id="Type3" name="type" value="Lilac">
+                    <label for="Type3"> Lilac</label><br>
+                    <input type="checkbox" id="Type4" name="type" value="Peony">
+                    <label for="Type4"> Peony</label><br>
+                    <input type="checkbox" id="Type5" name="type" value="Tulip">
+                    <label for="Type5"> Tulip</label><br>
+                    <input type="checkbox" id="Type6" name="type" value="Lily of the Valley">
+                    <label for="Type6"> Lily of the Valley </label><br>
+                    <input type="checkbox" id="Type7" name="type" value="Mix">
+                    <label for="Type7"> Mix</label><br><br>
+                </div>
+                <div class="checkbox-container">
+                <h3>Category</h3>
+                    <input type="checkbox" id="Category1"  name="category" value="Bouquet">
+                    <label for="Category1"> Bouquet</label><br>
+                    <input type="checkbox" id="Category2" name="category" value="Single Stem">
+                    <label for="Category2"> Single Stem</label><br><br>
+                </div>
+                <div class="checkbox-container">
                 <h3>Color</h3>
-                    <input type="checkbox" id="Color1">
+                    <input type="checkbox" id="Color1" name="color" value="Red">
                     <label for="Color1"> Red</label><br>
-                    <input type="checkbox" id="Color2">
+                    <input type="checkbox" id="Color2" name="color" value="Pink">
+                    <label for="Color2"> Pink</label><br>
+                    <input type="checkbox" id="Color3" name="color" value="Yellow">
+                    <label for="Color2"> Yellow</label><br>
+                    <input type="checkbox" id="Color4" name="color" value="Orange">
+                    <label for="Color2"> Orange</label><br>
+                    <input type="checkbox" id="Color5" name="color" value="Blue">
                     <label for="Color2"> Blue</label><br>
-                    <input type="checkbox" id="Color3">
-                    <label for="Color2"> Purple</label><br><br>
+                    <input type="checkbox" id="Color6" name="color" value="Purple">
+                    <label for="Color2"> Purple</label><br>
+                    <input type="checkbox" id="Color6" name="color" value="Multicolor">
+                    <label for="Color2"> Multicolor</label><br><br>
+                    </div>
+                <button type="submit">Filter</button>
+            </form>
         </div>
         <div class="shop-col-2">
-            <div class="row-2">
-                <select>
-                    <option>Default Sorting</option>
-                    <option>Sort by price</option>
-                    <option>Sort by rating</option>
-                    <option>Sort by popularity</option>
-                </select>
-            </div>
+            <!-- <form method="GET" action="/filter">
+                <div class="row-2">
+                    <select name="sort">
+                        <option value="default">Default Sorting</option>
+                        <option value="price_asc">Sort by price ascending</option>
+                        <option value="price_desc">Sort by price descending</option>
+                        <option value="rating">Sort by rating</option>
+                        <option value="popularity">Sort by popularity</option>
+                    </select>
+                    <button type="submit">Apply</button>
+                </div>
+            </form> -->
+            <!-- <div class="row">
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+                <div class="col-4">
+                    <img src="images/flower-example.jpg" alt="flower">
+                    <h4>tbd</h4>
+                    <p>100.00$</p>
+                    <a href="product-detail.html">details..</a>
+                </div>
+            </div> -->
             <div class="row">
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
-                <div class="col-4">
-                    <img src="images/flower-example.jpg" alt="flower">
-                    <h4>tbd</h4>
-                    <p>100.00$</p>
-                    <a href="product-detail.html">details..</a>
-                </div>
+                <!-- Products Placeholder -->
             </div>
+            
         </div>
     </div>
 
@@ -190,7 +232,50 @@
             hamburger.addEventListener('click', function() {
                 menu.classList.toggle('active');
             });
+            function getQueryParams() {
+        var params = {};
+        location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) {
+            params[key] = decodeURIComponent(value);
         });
+        return params;
+    }
+
+    const currentParams = getQueryParams();
+
+    // Function to update form actions with current parameters
+    function updateFormAction(form) {
+        let actionUrl = '/filter?';
+        // Gather all parameters from both forms
+        document.querySelectorAll('.shop-container input[type="checkbox"], .shop-container select').forEach(input => {
+            if (input.type === 'checkbox' && input.checked) {
+                actionUrl += `${input.name}=${encodeURIComponent(input.value)}&`;
+            } else if (input.tagName === 'SELECT') {
+                actionUrl += `${input.name}=${encodeURIComponent(input.value)}&`;
+            }
+        });
+        form.action = actionUrl;
+    }
+
+    // Assign event listeners to forms to update action URL upon submission
+    document.querySelectorAll('.shop-container form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            updateFormAction(this);
+        });
+    });
+
+    // Set checkbox and select inputs based on URL parameters
+    document.querySelectorAll('.shop-container input[type="checkbox"]').forEach(checkbox => {
+        if (currentParams[checkbox.name] && currentParams[checkbox.name].split(',').includes(checkbox.value)) {
+            checkbox.checked = true;
+        }
+    });
+
+    document.querySelectorAll('.shop-container select').forEach(select => {
+        if (currentParams[select.name]) {
+            select.value = currentParams[select.name];
+        }
+    });
+});
     </script>
 </body>
 
