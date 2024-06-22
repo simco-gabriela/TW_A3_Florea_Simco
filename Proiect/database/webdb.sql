@@ -190,29 +190,50 @@ CREATE TABLE IF NOT EXISTS `orders_details` (
 -- Dumping structure for table webgardening.products
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `seller_id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL,
   `description` longtext DEFAULT NULL,
   `image_url` varchar(150) NOT NULL,
   `price` float NOT NULL,
   `available` bit(1) NOT NULL,
-  `category` varchar(50) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
   `color` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  PRIMARY KEY (`id`),
+  KEY `FK_product_seller_id` (`seller_id`),
+  CONSTRAINT `FK_product_seller_id` FOREIGN KEY (`seller_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.products: ~3 rows (approximately)
-INSERT IGNORE INTO `products` (`id`, `name`, `description`, `image_url`, `price`, `available`, `category`, `type`, `color`) VALUES
-	(1, 'Beautiful Light Pink Peonies', NULL, 'images/flower-example.jpg', 10, b'1', 'Peony', 'Single stem', 'Pink'),
-	(2, 'Blooming Lilac', NULL, 'images/flower-example-lilac.jpg', 8, b'1', 'Liliac', 'Single stem', NULL),
-	(3, 'Yellow Tulips - Sunny Prince', NULL, 'images/flower-example-tulip.jpg', 13, b'1', NULL, 'Single stem', NULL);
+-- Dumping data for table webgardening.products: ~21 rows (approximately)
+INSERT IGNORE INTO `products` (`id`, `seller_id`, `name`, `description`, `image_url`, `price`, `available`, `type`, `category`, `color`) VALUES
+	(1, 3, 'Beautiful Light Pink Peonies', NULL, 'images/flower-example.jpg', 10, b'1', 'Peony', 'Single stem', 'Pink'),
+	(2, 3, 'Blooming Lilac', NULL, 'images/flower-example-lilac.jpg', 8, b'1', 'Liliac', 'Single stem', 'Purple'),
+	(3, 3, 'Yellow Tulips - Sunny Prince', NULL, 'images/flower-example-tulip.jpg', 13, b'1', 'Tulip', 'Single stem', 'Yellow'),
+	(4, 5, 'Red Perennial Tulips', NULL, 'images/flower-example-tulip-red-perennial.jpg', 7, b'1', 'Tulip', 'Single stem', 'Red'),
+	(6, 2, 'Gorgeous \'Pink Giant\' Tulip', NULL, 'images/flower-example-tulip-pink.jpg', 9, b'1', 'Tulip', 'Single stem', 'Pink'),
+	(7, 2, 'Lily-Flowered \'China Pink\' Tulip', NULL, 'images/flower-example-tulip-pink-china.jpg', 11, b'1', 'Tulip', 'Single stem', 'Pink'),
+	(8, 2, 'Magestic Sunrise Dynasty Tulip', NULL, 'images/flower-example-tulip-sunrise.jpg', 10, b'1', 'Tulip', 'Single stem', 'Multicolor'),
+	(9, 2, 'Tulip Triumph \'Tom Pouce\'', NULL, 'images/flower-example-tulip-tom-pouce.jpg', 8, b'1', 'Tulip', 'Single stem', 'Multicolor'),
+	(10, 2, 'Elegant Purple Tulip', NULL, 'images/flower-example-tulip-purple.jpg', 9, b'1', 'Tulip', 'Single stem', 'Purple'),
+	(11, 3, 'Purple Spanish Bluebells', NULL, 'images/flower-example-bluebell-purple.jpg', 5, b'1', 'Bluebell', 'Single stem', 'Purple'),
+	(12, 4, 'Pretty Fresh Pink Tulips Bouquet', NULL, 'images/flower-example-tulip-pink-bouquet.jpg', 30, b'1', 'Tulip', 'Bouquet', 'Pink'),
+	(13, 3, 'Stunning Bluebell', NULL, 'images/flower-example-bluebell-blue.jpg', 5, b'1', 'Bluebell', 'Single stem', 'Blue'),
+	(14, 3, 'Forever Lasting Bluebell Bouquet', NULL, 'images/flower-example-bluebell-bouquet.jpg', 20, b'1', 'Bluebell', 'Bouquet', 'Purple'),
+	(15, 6, 'Pink Lily of the Valley', NULL, 'images/flower-example-lily-of-the-valley-pink.jpg', 11, b'1', 'Lily of the Valley', 'Single stem', 'Pink'),
+	(16, 5, 'Purple Bearded Iris', NULL, 'images/flower-example-iris-purple.jpg', 6, b'1', 'Iris', 'Single stem', 'Purple'),
+	(17, 5, 'Rare Yellow Iris', NULL, 'images/flower-example-iris-yellow.jpg', 8, b'1', 'Iris', 'Single stem', 'Yellow'),
+	(18, 5, 'Colorful Bearded Iris Mix', NULL, 'images/flower-example-iris-colorful.jpg', 30, b'1', 'Iris', 'Bouquet', 'Multicolor'),
+	(19, 5, 'Blue Diamond Dutch Iris', NULL, 'images/flower-example-iris-blue.jpg', 8, b'1', 'Iris', 'Single stem', 'Multicolor'),
+	(20, 3, 'Red Grace Peony', NULL, 'images/flower-example-peony-red.jpg', 10, b'1', 'Peony', 'Single stem', 'Red'),
+	(21, 3, 'Yellow Itoh Peony', NULL, 'images/flower-example-peony-yellow.jpg', 10, b'1', 'Peony', 'Single stem', 'Yellow'),
+	(22, 3, 'Gorgeous Pink Peony Bouquet', NULL, 'images/flower-example-peony-bouquet-pink.jpg', 25, b'1', 'Peony', 'Bouquet', 'Pink');
 
 -- Dumping structure for table webgardening.reviews
 CREATE TABLE IF NOT EXISTS `reviews` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `rating` double NOT NULL,
+  `rating` double unsigned NOT NULL,
   `comment` longtext DEFAULT NULL,
   `created_on` timestamp NOT NULL,
   PRIMARY KEY (`id`),
@@ -220,9 +241,16 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   KEY `FK_reviews_prod_id` (`product_id`),
   CONSTRAINT `FK_reviews_prod_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_reviews_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.reviews: ~0 rows (approximately)
+-- Dumping data for table webgardening.reviews: ~6 rows (approximately)
+INSERT IGNORE INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `comment`, `created_on`) VALUES
+	(1, 6, 1, 5, 'Great flower!', '2024-06-20 12:51:31'),
+	(2, 6, 11, 4.5, 'Smells magnificent!', '2024-06-18 12:52:42'),
+	(3, 6, 3, 5, 'Prettiest color!', '2024-06-12 12:53:08'),
+	(4, 6, 8, 4.8, 'Truly magestic!', '2024-06-02 12:54:03'),
+	(5, 6, 7, 5, 'Most beautiful tulips I have ever seen!', '2024-05-22 12:54:39'),
+	(6, 4, 7, 4.5, 'I am impressed!', '2024-05-22 12:55:02');
 
 -- Dumping structure for table webgardening.tags
 CREATE TABLE IF NOT EXISTS `tags` (
@@ -259,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.users: ~6 rows (approximately)
+-- Dumping data for table webgardening.users: ~5 rows (approximately)
 INSERT IGNORE INTO `users` (`id`, `username`, `name`, `email`, `password_hash`, `date_of_birth`, `address`, `email_visibility`, `date_of_birth_visibility`, `address_visibility`) VALUES
 	(1, 'admin', 'Web Gardening', 'admin@webgardening.example.com', '$2y$2y$10$m85uJjzXr7y1rCG7PtDuhuncwvfQ2x4oE.t0Qgmb6SSLEogthvEyK', NULL, NULL, NULL, NULL, NULL),
 	(2, 'LucasGreenfield', 'Lucas Greenfield', 'lucas.greenfield@example.com', '$2y$10$3T31u7U9pRXEYxM2hzY3y.ZSt6BIEWZZggfJ5g0JhNWwiqpLb1e/S', NULL, NULL, NULL, NULL, NULL),
