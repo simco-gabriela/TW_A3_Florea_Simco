@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
 /* body */
 .wallpaper{
     background-color: #f7c7e2;
@@ -147,9 +154,7 @@ select:focus{
     margin-bottom:10px;
 }
 
-ul{
-    list-style-type: none;
-}
+
 @media only screen and (max-width: 600px) {
     .row {
         text-align: center;
