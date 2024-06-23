@@ -1,17 +1,17 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 /* body */
-.wallpaper{
+.wallpaper {
     background-color: #f7c7e2;
     height: 150px;
     display: flex;
     flex-direction: column;
 }
-.wallpaper h1{
+.wallpaper h1 {
     margin: auto;
     text-align: center;
     font-weight: 100;
@@ -24,54 +24,58 @@
 }
 .row {
     display: flex;
-    align-items: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    justify-content: space-around;
 }
-.categories{
+.categories {
     margin: 70px 0;
 }
 .col-4 {
-    flex-basis: 25%;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 22px;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
     min-width: 200px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     transition: 0.5s;
 }
-.col-4 img{
-    width: 100%;
+.col-4 img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
 }
 h4 {
     color: #555;
     font-weight: normal;
 }
-.col-4 p{
+.col-4 p {
     font-size: 14px;
 }
-.col-4:hover{
+.col-4:hover {
     transform: translateY(-5px);
 }
-ul{
+ul {
     list-style-type: none;
 }
-select{
+select {
     border: 1px solid #f7c7e2;
     padding: 5px;
 }
-select:focus{
+select:focus {
     outline: none;
 }
-
 .side-menu ul {
     margin-left: 10px;
 }
-.side-menu ul label{
+.side-menu ul label {
     list-style-type: none;
     font-weight: normal;
     margin-top: 10px;
     cursor: pointer;
 }
-.side-menu ul li{
+.side-menu ul li {
     list-style-type: none;
     font-weight: bold;
     margin-top: 10px;
@@ -79,53 +83,55 @@ select:focus{
 }
 .shop-container {
     max-width: 1080px;
-    margin: 100px auto 50px;
+    margin: 50px auto 50px;
     display: flex;
 }
-.shop-col-1{
+.shop-container img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    margin: auto;
+}
+.shop-col-1 {
     align-self: flex-start;
     width: 30%;
-    margin-top: 10px;
+    margin-top: 15px;
     line-height: 50px;
 }
-.shop-col-1 li{
+.shop-col-1 li {
     font-size: large;
     font-weight: bold;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.shop-col-1 img{
-    width: 100%;
+.shop-col-1 img {
+    width: 300px;
+    height: 300px;
 }
-.shop-col-2{
+.shop-col-2 {
     padding-left: 25px;
-    margin-top: 10px;
+    margin-top: 23px;
     width: 70%;
     line-height: 50px;
-}
-.row-2{
-    display: flex;
-    flex-direction: row-reverse;
 }
 .single-product {
     margin-top: 80px;
 }
-.single-product .shop-col-1{
-    padding: 0px;
-}
-.single-product .shop-col-1{
+.single-product .shop-col-1 {
     padding: 20px;
 }
-.single-product h4{
+.single-product h4 {
     margin: 20px 0;
     font-size: 20px;
     font-weight: bold;
 }
-.single-product select{
+.single-product select {
     display: block;
     padding: 10px;
     margin-top: 20px;
 }
-.single-product input{
+.single-product input {
     width: 50px;
     height: 40px;
     padding-left: 10px;
@@ -133,7 +139,7 @@ select:focus{
     margin-right: 10px;
     border: 1px solid #f7c7e2;
 }
-input:focus{
+input:focus {
     outline: none;
 }
 .button {
@@ -149,23 +155,54 @@ input:focus{
     border-radius: 30px;
 }
 
-ul{
+ul {
     list-style-type: none;
 }
+
 @media only screen and (max-width: 600px) {
     .row {
         text-align: center;
     }
-    .col-4{
+    .col-4 {
         flex-basis: 100%;
     }
-    .single-product .row{
+    .single-product .row {
         text-align: left;
     }
-    .single-product{
+    .single-product {
         padding: 20px 0;
     }
-    .col-4 img{
+    .col-4 img {
         width: 50%;
+    }
+    .shop-container {
+        margin: 20px auto;
+    }
+    .shop-col-1,
+    .shop-col-2 {
+        width: 100%;
+    }
+    .shop-col-1 img {
+        margin-top: 20px;
+    }
+    .col-4 {
+        flex-basis: 48%; /* Adjusted for smaller screens */
+    }
+}
+
+@media (max-width: 1000px) {
+    .shop-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .shop-col-1, .shop-col-2 {
+        width: 90%;
+    }
+    .col-4 {
+        flex: 1 1 100%; /* Take full width on smaller screens */
+        margin: 10px 0;
+    }
+    .col-4 img {
+        height: 100%; /* Adjust height on smaller screens */
     }
 }
