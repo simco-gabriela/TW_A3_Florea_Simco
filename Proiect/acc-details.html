@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>My account - Web Gardening</title>
         <link rel="stylesheet" href="css/acc-details.css">
+        <link rel="stylesheet" href="css/navbar.css">
         <link rel="icon" href="images/flower_icon_bar.png">
     </head>
 
@@ -27,7 +28,7 @@
             <main id="account-details" class="content-area">
                 <div class="profile">
                     <div class="profile-image">
-                        <img src="images/profile-picture.png" alt="Profile Image">
+                        <img id="profile-image-display" src="images/profile-picture.png" alt="Profile Image">
                         <a href="#" class="change-link" onclick="toggleEdit('profile-picture', 'profile-image-upload')">Change Profile Picture</a>
                         <input type="file" id="profile-image-upload" style="display: none;">
                     </div>

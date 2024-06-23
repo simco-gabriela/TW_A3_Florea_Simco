@@ -3,12 +3,12 @@ html {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #e0e0e0;
 }
 
 .container {
     position: relative;
-    height: 80%;
-    background-color: #f0f0f0;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,12 +20,13 @@ html {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 310px;
+    max-width: 350px;
 }
 
 h2 {
     text-align: center;
     color: #333;
+    margin-bottom: 20px;
 }
 
 form {
@@ -37,7 +38,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
     padding: 10px;
-    margin: 5px 0;
+    margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
     width: calc(100% - 22px);
@@ -47,7 +48,7 @@ input[type="password"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .checkbox-container label {
@@ -75,6 +76,10 @@ button {
     width: 150px;
 }
 
+button:hover {
+    background-color: #4cae4c;
+}
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -92,7 +97,6 @@ ul {
 
 @media (max-width: 768px) {
     .form-container {
-        width: 200px;
+        width: 90%;
     }
-
 }

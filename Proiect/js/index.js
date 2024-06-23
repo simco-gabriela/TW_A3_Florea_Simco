@@ -126,8 +126,6 @@ function serveShop(request, response) {
     });
 }
 
-
-
 function fetchBlogs(callback) {
     const query = `
         SELECT b.id, b.title, b.content, b.date, b.image_url, u.name AS author_name, 
@@ -442,9 +440,6 @@ function formatContentWithParagraphs(content) {
     return content.split('\n').map(line => `<p>${line}</p>`).join('');
 }
 
-
-
-
 function fetchRecommendedBlogs(currentBlogId, authorId, tags, callback) {
     // Split tags to handle multiple tags properly
     const tagsList = tags.split(', ');
@@ -600,9 +595,6 @@ function fetchShopProducts(filters, callback) {
             callback(err, null);
         });
 }
-
-
-
 
 function serveFilteredShop(request, response, queryParams) {
     const shopPath = path.join(__dirname, '..', 'shop.html');
@@ -904,7 +896,7 @@ const server = http.createServer(function(request, response) {
     const pathname = parsedUrl.pathname; // Get the path without query string
   
     try {
-        console.log(`${request.method} request for ${request.url}`,"Query:", parsedUrl.query);
+        console.log(`[${request.method}] request for [${request.url}]`,"Query:", parsedUrl.query);
 
         if (request.url.endsWith('.css')) {
             serveCSS(request, response);
@@ -948,7 +940,20 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: error.message }));
                 }
             });
-        } else {
+        } else if (request.method === 'POST' && request.url === '/get-acc-details') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const {token} = JSON.parse(data);
+                    const result = await Auth.getCurrentAccountData(token);
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify(result));
+                } catch (error) {
+                    console.error('Sign-in error:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ error: 'Server error' }));
+                }
+            });
+        }else {
             serveStaticFiles(request, response);
         }
     } catch (error) {
@@ -958,7 +963,6 @@ const server = http.createServer(function(request, response) {
 });
 
 function collectRequestData(request, callback) {
-    console.log('Received data:', data); // Log the received data
     let body = '';
     request.on('data', chunk => {
         body += chunk.toString();
