@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               11.3.2-MariaDB - mariadb.org binary distribution
+-- Server version:               11.4.2-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win64
 -- HeidiSQL Version:             12.6.0.6765
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `blogs` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.blogs: ~6 rows (approximately)
-INSERT IGNORE INTO `blogs` (`id`, `title`, `content`, `image_url`, `author_id`, `date`, `description`) VALUES
+REPLACE INTO `blogs` (`id`, `title`, `content`, `image_url`, `author_id`, `date`, `description`) VALUES
 	(1, 'How to Capture Stunning Flower Photos for Your Online Store', 'If you’re looking to enhance the visual appeal of your floral inventory online, great photography can make all the difference. Capturing the true beauty of your flowers not only attracts more customers but also significantly boosts your sales. Here are some professional techniques to help you take breathtaking photos that will make your flowers look irresistible online.\n\n1. Utilize Natural Light\nThe best lighting for flower photography is natural light. Aim to take your photos during the golden hours—shortly after sunrise or before sunset—when the light is soft and warm. This kind of lighting accentuates the natural colors and textures of the flowers without causing harsh shadows or overexposure.\n\n2. Choose the Right Background\nA simple, uncluttered background highlights the beauty of the flowers. Use a solid color or a subtle pattern that complements the flowers without competing for attention. This helps the viewer focus solely on the product.\n\n3. Experiment with Angles\nDifferent angles can dramatically change the perception of your flowers. Try taking photos from above, at a 45-degree angle, and at level with the flower to capture various dimensions and details. Each angle offers a unique perspective, so experiment to see which showcases your flowers best.\n\n4. Focus on Details\nClose-up shots that focus on details like the texture of the petals, the color gradients, and the intricacies of the stem can make for compelling images. Such images invite the viewer to take a closer look and appreciate the fine details of your flowers.\n\n5. Use a Proper Lens\nIf possible, use a macro lens for close-up photography. This type of lens allows you to get detailed shots without losing clarity. For wider shots, a standard lens should suffice, ensuring that the entire bouquet or arrangement is in focus.\n\n6. Consider the Composition\nPay attention to the composition of your shots. The rule of thirds is a basic principle that can help you balance your photos. Position the main elements of the bouquet off-center to create a more interesting and dynamic composition.\n\n7. Edit Thoughtfully\nPost-processing is essential but should be used sparingly. Adjust the brightness, contrast, and saturation to enhance the photo without making it look unnatural. Remember, the goal is to make the flowers look their best while still appearing real.\n\nBy following these tips, you can capture stunning, sales-worthy photographs of your flowers. With high-quality images, your online store will not only draw attention but also give your customers a closer, more attractive look at your beautiful inventory.', 'images/blog-image-1.jpg', 5, '2024-04-14', 'Emily Thorn shares professional techniques for taking breathtaking photos of your flowers. Discover the best lighting, angles, and setups to make your floral inventory look irresistible online, boosting appeal and sales.'),
 	(2, 'The Dirt on Soil: Ensuring Optimal Health for Your Spring Blooms\n', 'Spring is a critical time for gardeners, and the health of your soil is the foundation of a vibrant garden. As the saying goes, "Take care of the dirt, and the dirt will take care of your plants." Here\'s how you can test, amend, and maintain your soil to ensure that your tulips, daffodils, and other spring flowers thrive.\n\n1. Testing Your Soil\nBefore you begin planting, it’s essential to understand the current condition of your soil. Soil testing kits are readily available at garden centers and online. These tests provide valuable information about the pH level and the presence of vital nutrients like nitrogen, phosphorus, and potassium. For a more comprehensive analysis, consider sending a soil sample to a local agricultural extension service.\n\n2. Amending Your Soil\nOnce you have your soil test results, it’s time to amend the soil according to the needs of your plants. If your soil is too acidic, adding lime can help balance the pH. Conversely, if it\'s too alkaline, sulfur may be needed to lower the pH. To improve soil fertility, incorporate organic matter such as compost, manure, or leaf mold. These amendments not only enrich the soil but also improve its structure, drainage, and water-holding capacity.\n\n3. Choosing the Right Fertilizer\nFertilizers can provide additional nutrients to your soil, but choosing the right type is crucial. Opt for a balanced, slow-release fertilizer that will provide nutrients gradually throughout the growing season. Be cautious with chemical fertilizers, as overuse can harm plant roots and disrupt soil microbiology. Whenever possible, choose organic fertilizers—they are better for your plants and the environment.\n\n4. Mulching for Moisture and Health\nMulch is not just a decorative element—it\'s vital for maintaining soil health. A good layer of mulch (about 2-3 inches) can help retain soil moisture, suppress weeds, and regulate soil temperature. Organic mulches like bark, straw, or grass clippings also break down over time, further enriching the soil.\n\n5. Regular Maintenance\nSoil health is not a one-time task but an ongoing commitment. Regularly check the moisture level of your soil, especially during dry spells, and water accordingly. Avoid compacting the soil by walking on it excessively or using heavy machinery. Keep an eye on your plants for signs of nutrient deficiencies or other soil problems, and adjust your soil management practices as needed.', 'images/blog-image-2.jpg', 2, '2024-04-12', 'Find out the essentials of soil management for vibrant spring gardens. Learn how to test, amend, and maintain your soil to ensure your tulips, daffodils, and other spring flowers thrive.'),
 	(3, 'A Gardener\'s Guide to Fertilizer: Boosting Your Blooms the Right Way', 'Fertilizer is a key ingredient in any gardener\'s toolkit, especially when the goal is to maximize the bloom potential of spring flowers. Understanding the different types of fertilizers and their benefits can help you find the perfect match for your garden\'s needs. Here\'s a straightforward guide to getting the most out of your fertilizer to ensure vibrant and healthy blooms.\n\n1. Understanding Fertilizer Types\nFertilizers come in various forms, each with specific advantages:\n\nGranular Fertilizers: Slow-releasing and easy to apply, granular fertilizers release nutrients over time, providing a steady supply of nutrition to your plants.\nLiquid Fertilizers: Quick-acting and ideal for addressing nutrient deficiencies rapidly, liquid fertilizers are perfect for a mid-season boost.\nOrganic Fertilizers: Made from natural materials such as compost, manure, or bone meal, organic fertilizers improve soil structure while feeding your plants.\nSynthetic Fertilizers: These are formulated to provide an immediate supply of nutrients and are often used for their precise nutrient ratios.\n2. Selecting the Right Nutrient Mix\nFertilizers are labeled with three numbers, representing the proportions of nitrogen (N), phosphorus (P), and potassium (K), respectively — crucial nutrients for plant health:\n\nNitrogen (N): Promotes leafy growth and is essential for the vibrant green color of plants.\nPhosphorus (P): Encourages root development, flower, and fruit production.\nPotassium (K): Aids in overall plant health and disease resistance.\nFor flowering plants, choose a fertilizer with a higher phosphorus content to encourage more blooms.\n\n3. Timing Is Everything\nThe timing of fertilizer application is critical. Apply fertilizers early in the season to kick-start growth, and consider a mid-season application to support blooming. Always avoid fertilizing late in the season as this can lead to new growth that is vulnerable to frost.\n\n4. Application Methods\nFertilizer can be applied in several ways, depending on the type and the specific needs of your garden:\n\nBroadcasting: Spreading fertilizer evenly over the soil surface, followed by a thorough watering.\nSide-dressing: Applying fertilizer alongside your plants to target their root systems more directly.\nFoliar Feeding: Spraying liquid fertilizer directly onto the leaves for quick absorption.\n5. Consider the Environment\nAlways consider the environmental impact of your fertilizing habits. Over-fertilization can lead to nutrient runoff, which pollutes local waterways. Use the recommended amounts, and opt for organic fertilizers whenever possible to minimize environmental impact.', 'images/blog-image-3.jpg', 3, '2024-04-10', 'Maximize the bloom potential of your spring flowers with the right fertilizer. Learn about different types and their benefits to find the best match for your gardening needs.'),
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `blogs_comments` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.blogs_comments: ~2 rows (approximately)
-INSERT IGNORE INTO `blogs_comments` (`id`, `blog_id`, `user_id`, `content`, `date`) VALUES
+REPLACE INTO `blogs_comments` (`id`, `blog_id`, `user_id`, `content`, `date`) VALUES
 	(1, 1, 3, 'So useful! Will be using for sure!', '2024-05-21 07:51:47'),
 	(2, 6, 6, 'We were waiting for this! Thanks!', '2024-05-14 12:30:00');
 
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `blogs_likes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.blogs_likes: ~7 rows (approximately)
-INSERT IGNORE INTO `blogs_likes` (`id`, `blog_id`, `user_id`) VALUES
+REPLACE INTO `blogs_likes` (`id`, `blog_id`, `user_id`) VALUES
 	(1, 1, 2),
 	(2, 1, 3),
 	(3, 6, 1),
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `blogs_tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.blogs_tags: ~14 rows (approximately)
-INSERT IGNORE INTO `blogs_tags` (`blog_id`, `tag_id`) VALUES
+REPLACE INTO `blogs_tags` (`blog_id`, `tag_id`) VALUES
 	(1, 1),
 	(1, 2),
 	(2, 3),
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.cart: ~2 rows (approximately)
-INSERT IGNORE INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `added_on`) VALUES
+REPLACE INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `added_on`) VALUES
 	(1, 6, 1, 2, '2024-06-05'),
 	(2, 6, 2, 3, '2024-06-03');
 
@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.products: ~21 rows (approximately)
-INSERT IGNORE INTO `products` (`id`, `seller_id`, `name`, `description`, `image_url`, `price`, `available`, `type`, `category`, `color`) VALUES
+REPLACE INTO `products` (`id`, `seller_id`, `name`, `description`, `image_url`, `price`, `available`, `type`, `category`, `color`) VALUES
 	(1, 3, 'Beautiful Light Pink Peonies', 'Elegant and delicate, our Beautiful Light Pink Peonies exude timeless charm. With their soft petals and enchanting fragrance, these peonies are perfect for adding a touch of grace to any bouquet or garden.', 'images/flower-example.jpg', 10, b'1', 'Peony', 'Single stem', 'Pink'),
 	(2, 3, 'Blooming Lilac', 'Experience the enchanting beauty of our Blooming Lilac. Known for its prolific clusters of fragrant purple blossoms, this perennial shrub thrives in sunny locations with well-drained soil. Ideal for creating stunning garden borders or cut-flower arrangements, our lilacs bloom in late spring to early summer, attracting butterflies and filling the air with their delightful aroma. Add a touch of elegance and natural charm to your outdoor spaces with these resilient and captivating blooms.', 'images/flower-example-lilac.jpg', 8, b'1', 'Liliac', 'Single stem', 'Purple'),
 	(3, 3, 'Yellow Tulips - Sunny Prince', 'Introducing our Yellow Tulips - Sunny Prince, a regal addition to any garden or floral display. These vibrant yellow tulips boast sturdy stems and a cheerful disposition, blooming in early spring to brighten up your landscape. With their classic cup-shaped blooms and robust growth, Sunny Prince tulips are perfect for borders, containers, or indoor arrangements. Bring a splash of sunshine to your surroundings with these captivating and resilient flowers.', 'images/flower-example-tulip.jpg', 13, b'1', 'Tulip', 'Single stem', 'Yellow'),
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `reviews` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.reviews: ~6 rows (approximately)
-INSERT IGNORE INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `comment`, `created_on`) VALUES
+REPLACE INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `comment`, `created_on`) VALUES
 	(1, 6, 1, 5, 'Great flower!', '2024-06-20 12:51:31'),
 	(2, 6, 11, 4.5, 'Smells magnificent!', '2024-06-18 12:52:42'),
 	(3, 6, 3, 5, 'Prettiest color!', '2024-06-12 12:53:08'),
@@ -260,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `tags` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.tags: ~10 rows (approximately)
-INSERT IGNORE INTO `tags` (`id`, `name`) VALUES
+REPLACE INTO `tags` (`id`, `name`) VALUES
 	(1, 'Flower Photography'),
 	(2, 'Marketing Tips'),
 	(3, 'Soil Health'),
@@ -286,17 +286,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `date_of_birth_visibility` bit(1) DEFAULT NULL,
   `address_visibility` bit(1) DEFAULT NULL,
   `description` longtext DEFAULT 'Flower enthusiast.',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.users: ~6 rows (approximately)
-INSERT IGNORE INTO `users` (`id`, `username`, `name`, `email`, `password_hash`, `date_of_birth`, `address`, `pfp_url`, `email_visibility`, `date_of_birth_visibility`, `address_visibility`, `description`) VALUES
-	(1, 'admin', 'Web Gardening', 'admin@webgardening.example.com', '$2y$2y$10$m85uJjzXr7y1rCG7PtDuhuncwvfQ2x4oE.t0Qgmb6SSLEogthvEyK', '1999-06-23', 'Web Gardening Headquarters', 'images/default-pfp.jpg', b'1', b'1', b'1', 'Admin.'),
-	(2, 'LucasGreenfield', 'Lucas Greenfield', 'lucas.greenfield@example.com', '$2y$10$3T31u7U9pRXEYxM2hzY3y.ZSt6BIEWZZggfJ5g0JhNWwiqpLb1e/S', '1987-05-23', '456 Blossom Avenue, Bloomville\n', 'images/default-pfp.jpg', b'1', b'1', b'1', 'As an avid gardener turned entrepreneur, I\'m committed to offering the finest blooms through our flower-selling platform. Every flower we grow and sell is nurtured with meticulous care, ensuring premium quality and freshness. Join us in celebrating the beauty of nature\'s bounty, one exquisite bloom at a time.'),
-	(3, 'AnitaBloom', 'Anita Bloom', 'anita.bloom@example.com', '$2y$10$g2L8QO6cYLrRCAZwHg6pCuHDC81BvlsbVQnOne67GuHx9HGKGkE2K', '2000-02-20', '246 Orchid Road, Tulip Town\n', 'images/default-pfp.jpg', b'1', b'1', b'1', 'I\'m fascinated by the diverse world of flowers and the stories they tell through their unique hues and scents. Our platform offers a curated selection of premium blooms, sourced to perfection. Whether you\'re looking to brighten your day or seeking the ideal gift, discover how our passion for flowers elevates every moment.'),
-	(4, 'DandyLion', 'Dandy Lion', 'dandy.lion@example.com', '$2y$10$wRurNvd4EihEQH.Wc2BdY.EnD2kfyPMflIoRzVb4FllMS50Te5OTS', '1992-10-10', '789 Garden Lane, Roseville\n', 'images/default-pfp.jpg', b'1', b'1', b'1', 'Driven by a deep love for flowers, I devote myself to cultivating and selling these natural marvels. Each bloom reflects my commitment to nurturing beauty and spreading joy through nature\'s finest creations. Discover the essence of floral elegance and bring a touch of natural splendor into your life.'),
-	(5, 'EmilyThorn', 'Emily Thorn', 'emily.thorn@example.com', '$2y$10$hXgBDf2UoqapkgQR7C3Bv.CQUIATSM0dr2PMwkhnRB01QgOORaPW.', '2003-12-04', '777 Sunflower Boulevard, Magnolia Meadows\n\n\n\n\n\n', 'images/default-pfp.jpg', b'1', b'1', b'1', 'I believe in the transformative power of flowers to elevate any moment. By meticulously growing and selecting each bloom, I ensure that our offerings exceed expectations in both beauty and quality. Join me in celebrating nature\'s finest with flowers that embody elegance, freshness, and the joy they bring.'),
-	(6, 'EpicFace', 'Florea Florin-Cosmin', 'cosminflorin12@gmail.com', '$2y$10$gJf2wDareswXjWSgIvOqku9sxrtZM1P4xO2EDzqydslOACPp0Quxu', '1980-01-01', '123 Floral Street, Petal City', 'images/profile-picture.png', b'1', b'1', b'1', 'I\'m passionate about flowers and their beauty, which is why I\'ve dedicated myself to cultivating and sharing these wonders through our flower-selling platform. With a deep love for nature\'s colors and fragrances, I strive to bring the joy of fresh blooms into every home. Join me in exploring a world where every petal tells a story of growth, care, and the simple joys of nature.');
+-- Dumping data for table webgardening.users: ~7 rows (approximately)
+REPLACE INTO `users` (`id`, `username`, `name`, `email`, `password_hash`, `date_of_birth`, `address`, `pfp_url`, `email_visibility`, `date_of_birth_visibility`, `address_visibility`, `description`) VALUES
+	(1, 'admin', 'Web Gardening', 'admin@webgardening.example.com', '24a7c19a9dae9eeedae5c44c2015a00d8dc74962b9ed2e658a8d959c96b1b9af2a2cacb301e749d936ae7612df9b95c159ec054d43c75e65eca5f8860e5b99de7149e4848ab599727f8f3f51fb1caca8', '1999-06-23', 'Web Gardening Headquarters', 'images/default-pfp.jpg', b'1', b'1', b'1', 'Admin.'),
+	(2, 'LucasGreenfield', 'Lucas Greenfield', 'lucas.greenfield@example.com', '24a7c19a9dae9eeedae5c44c2015a00d8dc74962b9ed2e658a8d959c96b1b9af2a2cacb301e749d936ae7612df9b95c159ec054d43c75e65eca5f8860e5b99de7149e4848ab599727f8f3f51fb1caca8', '1987-05-23', '456 Blossom Avenue, Bloomville\n', 'images/default-pfp.jpg', b'1', b'1', b'1', 'As an avid gardener turned entrepreneur, I\'m committed to offering the finest blooms through our flower-selling platform. Every flower we grow and sell is nurtured with meticulous care, ensuring premium quality and freshness. Join us in celebrating the beauty of nature\'s bounty, one exquisite bloom at a time.'),
+	(3, 'AnitaBloom', 'Anita Bloom', 'anita.bloom@example.com', '24a7c19a9dae9eeedae5c44c2015a00d8dc74962b9ed2e658a8d959c96b1b9af2a2cacb301e749d936ae7612df9b95c159ec054d43c75e65eca5f8860e5b99de7149e4848ab599727f8f3f51fb1caca8', '2000-02-20', '246 Orchid Road, Tulip Town\n', 'images/default-pfp.jpg', b'1', b'1', b'1', 'I\'m fascinated by the diverse world of flowers and the stories they tell through their unique hues and scents. Our platform offers a curated selection of premium blooms, sourced to perfection. Whether you\'re looking to brighten your day or seeking the ideal gift, discover how our passion for flowers elevates every moment.'),
+	(4, 'DandyLion', 'Dandy Lion', 'dandy.lion@example.com', '24a7c19a9dae9eeedae5c44c2015a00d8dc74962b9ed2e658a8d959c96b1b9af2a2cacb301e749d936ae7612df9b95c159ec054d43c75e65eca5f8860e5b99de7149e4848ab599727f8f3f51fb1caca8', '1992-10-10', '789 Garden Lane, Roseville\n', 'images/default-pfp.jpg', b'1', b'1', b'1', 'Driven by a deep love for flowers, I devote myself to cultivating and selling these natural marvels. Each bloom reflects my commitment to nurturing beauty and spreading joy through nature\'s finest creations. Discover the essence of floral elegance and bring a touch of natural splendor into your life.'),
+	(5, 'EmilyThorn', 'Emily Thorn', 'emily.thorn@example.com', '24a7c19a9dae9eeedae5c44c2015a00d8dc74962b9ed2e658a8d959c96b1b9af2a2cacb301e749d936ae7612df9b95c159ec054d43c75e65eca5f8860e5b99de7149e4848ab599727f8f3f51fb1caca8', '2003-12-04', '777 Sunflower Boulevard, Magnolia Meadows\n\n\n\n\n\n', 'images/default-pfp.jpg', b'1', b'1', b'1', 'I believe in the transformative power of flowers to elevate any moment. By meticulously growing and selecting each bloom, I ensure that our offerings exceed expectations in both beauty and quality. Join me in celebrating nature\'s finest with flowers that embody elegance, freshness, and the joy they bring.'),
+	(6, 'EpicFace', 'Florea Florin-Cosmin', 'cosminflorin12@gmail.com', '24a7c19a9dae9eeedae5c44c2015a00d8dc74962b9ed2e658a8d959c96b1b9af2a2cacb301e749d936ae7612df9b95c159ec054d43c75e65eca5f8860e5b99de7149e4848ab599727f8f3f51fb1caca8', '1980-01-01', '123 Floral Street, Petal City', 'images/profile-picture.png', b'1', b'1', b'1', 'I\'m passionate about flowers and their beauty, which is why I\'ve dedicated myself to cultivating and sharing these wonders through our flower-selling platform. With a deep love for nature\'s colors and fragrances, I strive to bring the joy of fresh blooms into every home. Join me in exploring a world where every petal tells a story of growth, care, and the simple joys of nature.'),
+	(7, 'abc', 'test', 'a@b.c', '24a7c19a9dae9eeedae5c44c2015a00d8dc74962b9ed2e658a8d959c96b1b9af2a2cacb301e749d936ae7612df9b95c159ec054d43c75e65eca5f8860e5b99de7149e4848ab599727f8f3f51fb1caca8', '2024-06-23', 'In my imagination', 'images/default-pfp.jpg', b'1', b'1', b'1', 'Flower enthusiast.');
 
 -- Dumping structure for table webgardening.wishlist
 CREATE TABLE IF NOT EXISTS `wishlist` (
@@ -312,7 +314,7 @@ CREATE TABLE IF NOT EXISTS `wishlist` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.wishlist: ~1 rows (approximately)
-INSERT IGNORE INTO `wishlist` (`id`, `user_id`, `product_id`, `added_on`) VALUES
+REPLACE INTO `wishlist` (`id`, `user_id`, `product_id`, `added_on`) VALUES
 	(1, 6, 3, '2024-05-01');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
