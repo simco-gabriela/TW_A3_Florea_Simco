@@ -851,10 +851,6 @@ function generateBlogsHTML(blogs) {
     `).join('');
 }
 
-
-
-
-
 function serveStaticFiles(request, response) {
     const filePath = path.join(__dirname, '..', request.url);
     const ext = path.extname(filePath);

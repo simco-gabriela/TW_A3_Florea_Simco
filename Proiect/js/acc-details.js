@@ -10,18 +10,11 @@ const ADDRESS_DISPLAY_TAG = document.querySelector('#address-display');
 function populateAccountData(data) {
     IMAGE_DISPLAY_TAG.src = data.pfp_url;
     NAME_DISPLAY_TAG.textContent = data.name;
-    // EMAIL_DISPLAY_TAG
-    // USERNAME_DISPLAY_TAG
-    // DOB_DISPLAY_TAG
-    // ADDRESS_DISPLAY_TAG
+    EMAIL_DISPLAY_TAG.textContent = data.email;
+    USERNAME_DISPLAY_TAG.textContent = data.username;
+    DOB_DISPLAY_TAG.textContent = data.date_of_birth.substring(0,10);
+    ADDRESS_DISPLAY_TAG = data.address;
 }
-
-// username: user.username,
-// name: user.name,
-// email: user.email,
-// date_of_birth: user.date_of_birth,
-// address: user.address,
-// pfp_url: user.pfp_url
 
 document.addEventListener('DOMContentLoaded', function () {
     toggleSection('account-details');
