@@ -13,7 +13,6 @@ body {
 }
 
 
-
 .blog-container {
     display: flex;
     justify-content: center;
@@ -31,8 +30,8 @@ body {
     box-sizing: border-box;
 }
 .blog-post img {
-    max-width: 100%;
-    height: auto;
+    max-width: 580px;
+    height: 580px;
     display: block;
     margin: 0 auto 15px; /* Center image and add margin */
 
@@ -73,7 +72,10 @@ body {
 
 .blog-post .content p {
     margin: 10px 0;
+    line-height: 1.6;  
+    text-align: justify; 
 }
+
 
 .blog-post .likes {
     color: #666;
@@ -190,9 +192,7 @@ body {
 
 
 @media (max-width: 1024px) {
-    .logo img {
-        height: 50px;
-    }
+
 
     .blog-container {
         flex-direction: column;
@@ -207,5 +207,12 @@ body {
     .recommended-blogs {
         max-width: 100%;
         margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .blog-post img{
+        max-width: 400px;
+        height: 400px;
     }
 }
