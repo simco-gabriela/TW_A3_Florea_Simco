@@ -371,7 +371,7 @@ function serveBlogPage(request, response) {
                             <img src="${b.image_url}" alt="Recommended Blog Image">
                             <div class="details">
                                 <a href="blog-page.html?blogId=${b.id}" class="title">${b.title}</a>
-                                <p class="author">by ${b.author_name}</p>
+                                <a href="profile-page.html?userId=${b.author_id}" class="author">by ${b.author_name}</a>
                             </div>
                         </div>
                     </div>
@@ -451,7 +451,7 @@ function fetchRecommendedBlogs(currentBlogId, authorId, tags, callback) {
 
     // Query to find blogs by the same author or with shared tags, excluding the current blog
     let query = `
-        SELECT b.id, b.title, b.image_url, u.name AS author_name
+        SELECT b.id, b.title, b.image_url, u.id AS author_id, u.name AS author_name
         FROM blogs b
         JOIN users u ON b.author_id = u.id
         LEFT JOIN blogs_tags bt ON b.id = bt.blog_id
