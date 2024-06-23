@@ -45,17 +45,18 @@ function serveHome(request, response) {
                     } else {
                         let blogsHtml = blogs.map(blog => `
                             <article>
-                                <img src="${blog.image_url}" alt="Blog ${blog.id}">
+                                <img src="${blog.image_url}" alt="${blog.title}">
                                 <div class="blog-content">
                                     <div class="blog-info">
                                         <span class="date">${new Date(blog.date).toLocaleDateString()}</span> |
-                                        <span class="author">${blog.author_name}</span> |
+                                        <a href="profile-page.html?userId=${blog.author_id}" class="author">${blog.author_name}</a> |
                                         <span class="tags">${blog.tags}</span>
                                     </div>
                                     <h3>${blog.title}</h3>
-                                    <button>Read More</button>
+                                    <button onclick="location.href='blog-page.html?blogId=${blog.id}'">Read More</button>
                                 </div>
-                            </article>`).join('');
+                            </article>
+                        `).join('');
 
                         fetchProducts((err, products) => {
                             if (err) {
@@ -64,11 +65,14 @@ function serveHome(request, response) {
                                 response.end();
                             } else {
                                 let productsHtml = products.map(product => `
-                                    <article>
+                                    <article onclick="location.href='product-detail.html?id=${product.id}'" style="cursor: pointer;">
                                         <img src="${product.image_url}" alt="${product.name}">
-                                        <h3>${product.name}</h3>
-                                        <p>$${product.price.toFixed(2)}</p>
-                                    </article>`).join('');
+                                        <div class="product-info">
+                                            <h3>${product.name}</h3>
+                                            <p>$${product.price.toFixed(2)}</p>
+                                        </div>
+                                    </article>
+                                `).join('');
 
                                 // Replace placeholder sections in the HTML with real data
                                 data = data.replace('<!-- Blogs Placeholder -->', blogsHtml);
@@ -147,7 +151,7 @@ function fetchBlogs(callback) {
 
 function fetchBlogsAll(callback) {
     const query = `
-        SELECT b.id, b.title, b.description, b.date, b.image_url, u.name AS author_name, 
+        SELECT b.id, b.title, b.description, b.date, b.image_url, u.id AS author_id, u.name AS author_name, 
                GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
         FROM blogs b
         JOIN users u ON b.author_id = u.id
@@ -215,13 +219,16 @@ function serveBlog(request, response) {
                                         <img src="${blog.image_url}" alt="Blog Image">
                                         <div class="blog-post-content">
                                             <h3 class="blog-post-title">${blog.title}</h3>
-                                            <p class="blog-post-meta">${new Date(blog.date).toLocaleDateString()} | by ${blog.author_name}</p>
-                                            <p class="blog-post-tags">Tags: ${blog.tags}</p>
+                                            <p class="blog-post-meta">
+                                                ${new Date(blog.date).toLocaleDateString()} | 
+                                                by <a href="profile-page.html?userId=${blog.author_id}">${blog.author_name}</a> |
+                                                <p><span class="tags">Tags: ${blog.tags}</span></p>
+                                            </p>
                                             <p class="blog-post-desc">${blog.description}</p>
                                             <a href="blog-page.html?blogId=${blog.id}" class="read-more-btn">Read more</a>
                                         </div>
                                     </div>
-                                `).join('') : '<p>No results found for your search or tag.</p>';
+                                `).join('') : '<p>No results found for your search or tag.</p>';                                
 
                                 data = data.replace('<!-- Blog Posts Placeholder -->', blogsHtml);
                                 
@@ -249,7 +256,7 @@ function serveBlog(request, response) {
 
 function fetchBlogsByTag(tag, callback) {
     let query = `
-        SELECT b.id, b.title, b.description, b.date, b.image_url, u.name AS author_name,
+        SELECT b.id, b.title, b.description, b.date, b.image_url, u.id AS author_id, u.name AS author_name,
                GROUP_CONCAT(DISTINCT t.name ORDER BY t.name SEPARATOR ', ') AS tags
         FROM blogs b
         INNER JOIN users u ON b.author_id = u.id
@@ -273,7 +280,7 @@ function fetchBlogsByCategory(category, callback) {
     switch (category) {
         case 'Trending':
             query = `
-                SELECT b.id, b.title, b.description, b.date, b.image_url, u.name AS author_name,
+                SELECT b.id, b.title, b.description, b.date, b.image_url, u.id AS author_id, u.name AS author_name,
                     GROUP_CONCAT(t.name SEPARATOR ', ') AS tags, 
                     (SELECT COUNT(*) FROM blogs_comments WHERE blog_id = b.id) +
                     (SELECT COUNT(*) FROM blogs_likes WHERE blog_id = b.id) AS popularity
@@ -286,7 +293,7 @@ function fetchBlogsByCategory(category, callback) {
             break;
         case 'HighestRated':
             query = `
-                SELECT b.id, b.title, b.description, b.date, b.image_url, u.name AS author_name,
+                SELECT b.id, b.title, b.description, b.date, b.image_url, u.id AS author_id, u.name AS author_name,
                     GROUP_CONCAT(t.name SEPARATOR ', ') AS tags, 
                     (SELECT COUNT(*) FROM blogs_likes WHERE blog_id = b.id) AS rating
                 FROM blogs b
@@ -298,7 +305,7 @@ function fetchBlogsByCategory(category, callback) {
             break;
         case 'OurPosts':
             query = `
-                SELECT b.id, b.title, b.description, b.date, b.image_url, u.name AS author_name,
+                SELECT b.id, b.title, b.description, b.date, b.image_url, u.id AS author_id, u.name AS author_name,
                     GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
                 FROM blogs b
                 JOIN users u ON b.author_id = u.id
@@ -329,7 +336,7 @@ function serveBlogPage(request, response) {
     }
 
     const blogQuery = `
-        SELECT b.id, b.title, b.content, b.date, b.image_url, u.id AS author_id, u.name AS author_name, u.pfp_url AS author_avatar,
+        SELECT b.id, b.title, b.content, b.date, b.image_url, u.id AS author_id, u.id AS author_id, u.name AS author_name, u.pfp_url AS author_avatar,
                GROUP_CONCAT(DISTINCT t.name SEPARATOR ', ') AS tags,
                (SELECT COUNT(*) FROM blogs_likes WHERE blog_id = b.id) AS like_count
         FROM blogs b
@@ -479,9 +486,6 @@ function fetchRecommendedBlogs(currentBlogId, authorId, tags, callback) {
 
 
 
-
-
-
 function fetchTags(callback) {
     const query = `
         SELECT DISTINCT name
@@ -509,7 +513,7 @@ function fetchRecentBlogs(callback) {
 
 function fetchBlogsSearch(searchQuery, callback) {
     let query = `
-        SELECT b.id, b.title, b.description, b.date, b.image_url, u.name AS author_name, 
+        SELECT b.id, b.title, b.description, b.date, b.image_url, u.id AS author_id, u.name AS author_name, 
                GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
         FROM blogs b
         JOIN users u ON b.author_id = u.id
@@ -634,6 +638,228 @@ function serveFilteredShop(request, response, queryParams) {
     });
 }
 
+function fetchRecommendedProducts(productId, sellerId, type, category, color, callback) {
+    // Query to find similar products, excluding the current product
+    const query = `
+        SELECT p.id, p.name, p.image_url, p.price
+        FROM products p
+        WHERE p.id != ? AND (p.seller_id = ? OR p.type = ? OR p.category = ? OR p.color = ?)
+        ORDER BY RAND() 
+        LIMIT 4`;
+
+    MariaDBConnection.query(query, [productId, sellerId, type, category, color])
+        .then(results => {
+            callback(null, results);
+        })
+        .catch(err => {
+            callback(err, null);
+        });
+}
+
+function serveProductDetailPage(request, response) {
+    const parsedUrl = url.parse(request.url, true);
+    const productId = parsedUrl.query.id;
+
+    if (!productId) {
+        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.write('Product not found');
+        response.end();
+        return;
+    }
+
+    const query = `
+        SELECT p.*, u.username AS seller_name, u.id AS seller_id
+        FROM products p
+        JOIN users u ON p.seller_id = u.id
+        WHERE p.id = ? AND p.available = 1`;
+
+    MariaDBConnection.query(query, [productId])
+        .then(results => {
+            if (results.length === 0) {
+                response.writeHead(404, {'Content-Type': 'text/html'});
+                response.write('Product not found');
+                response.end();
+                return;
+            }
+
+            const product = results[0];
+            fs.readFile(path.join(__dirname, '..', 'product-detail.html'), 'utf8', (err, data) => {
+                if (err) {
+                    response.writeHead(500, {'Content-Type': 'text/html'});
+                    response.write('Error loading the product detail page');
+                    response.end();
+                    return;
+                }
+
+                // Fetch recommended products
+                fetchRecommendedProducts(product.id, product.seller_id, product.type, product.category, product.color, (recErr, recommendedProducts) => {
+                    if (recErr) {
+                        response.writeHead(500, {'Content-Type': 'text/html'});
+                        response.write('Error fetching recommended products');
+                        response.end();
+                        return;
+                    }
+
+                    // Generate HTML for recommended products
+                    const recommendedHtml = recommendedProducts.map(rp => `
+                        <div class="col-4">
+                            <img src="${rp.image_url}" alt="${rp.name}">
+                            <h4>${rp.name}</h4>
+                            <p>$${rp.price.toFixed(2)}</p>
+                            <a href="product-detail.html?id=${rp.id}">More details</a>
+                        </div>
+                    `).join('');
+
+                    // Replace the placeholders in the HTML template with actual product data and recommended products
+                    let pageContent = data
+                        .replace('<!-- Image Placeholder -->', `<img src="${product.image_url}" alt="${product.name}">`)
+                        .replace('<!-- Product Name Placeholder -->', product.name)
+                        .replace('<!-- Seller Placeholder -->', `<a href="profile-page.html?userId=${product.seller_id}">${product.seller_name}</a>`)
+                        .replace('<!-- Type Placeholder -->', `Type: ${product.type}`)
+                        .replace('<!-- Category Placeholder -->', `Category: ${product.category}`)
+                        .replace('<!-- Color Placeholder -->', `Color: ${product.color}`)
+                        .replace('<!-- Price Placeholder -->', `$${product.price.toFixed(2)}`)
+                        .replace('<!-- Product Description Placeholder -->', product.description)
+                        .replace('<!-- Recommended Products Placeholder -->', recommendedHtml);
+
+                    response.writeHead(200, {'Content-Type': 'text/html'});
+                    response.write(pageContent);
+                    response.end();
+                });
+            });
+        })
+        .catch(err => {
+            response.writeHead(500, {'Content-Type': 'text/html'});
+            response.write('Error fetching product details');
+            response.end();
+        });
+}
+
+
+function serveProfilePage(request, response) {
+    const parsedUrl = url.parse(request.url, true);
+    const userId = parsedUrl.query.userId;
+
+    if (!userId) {
+        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.write('Profile not found');
+        response.end();
+        return;
+    }
+
+    const userProfileQuery = `
+        SELECT id, username, name, email, date_of_birth, address, pfp_url, description,
+               email_visibility, date_of_birth_visibility, address_visibility
+        FROM users
+        WHERE id = ?`;
+
+    // Fetch User Details
+    MariaDBConnection.query(userProfileQuery, [userId])
+        .then(userResult => {
+            if (userResult.length === 0) {
+                response.writeHead(404, {'Content-Type': 'text/html'});
+                response.write('Profile not found');
+                response.end();
+                return;
+            }
+
+            const user = userResult[0];
+
+            // Prepare to fetch products and blogs simultaneously
+            const productsQuery = `SELECT * FROM products WHERE seller_id = ? AND available = 1`;
+            const blogsQuery = `
+            SELECT b.id, b.title, b.content, b.image_url, b.date, b.description,
+                   GROUP_CONCAT(t.name SEPARATOR ', ') AS tags
+            FROM blogs b
+            LEFT JOIN blogs_tags bt ON b.id = bt.blog_id
+            LEFT JOIN tags t ON bt.tag_id = t.id
+            WHERE b.author_id = ?
+            GROUP BY b.id
+            ORDER BY b.date DESC`;
+
+            // Use Promise.all to fetch both products and blogs at once
+            Promise.all([
+                MariaDBConnection.query(productsQuery, [userId]),
+                MariaDBConnection.query(blogsQuery, [userId])
+            ]).then(results => {
+                const [products, blogs] = results;
+                const filePath = path.join(__dirname, '..', 'profile-page.html');
+
+                fs.readFile(filePath, 'utf8', (err, data) => {
+                    if (err) {
+                        console.error('Error reading HTML file:', err);
+                        response.writeHead(500, {'Content-Type': 'text/html'});
+                        response.write('Error loading the profile detail page');
+                        response.end();
+                        return;
+                    }
+
+                    let profileContent = data
+                        .replace('<!-- Profile Image Placeholder -->', `<img src="${user.pfp_url || 'images/default-avatar.png'}" alt="Profile Image">`)
+                        .replace('<!-- Name Placeholder -->', user.name)
+                        .replace('<!-- Username Placeholder -->', user.username)
+                        .replace('<!-- Email Placeholder -->', user.email_visibility && user.email ? `<strong>Email:</strong> ${user.email}` : '')
+                        .replace('<!-- Date of Birth Placeholder -->', user.date_of_birth_visibility && user.date_of_birth ? `<strong>Date of Birth:</strong> ${new Date(user.date_of_birth).toLocaleDateString()}` : '')
+                        .replace('<!-- Location Placeholder -->', user.address_visibility && user.address ? `<strong>Location:</strong> ${user.address}` : '')
+                        .replace('<!-- Description Placeholder -->', user.description || '')
+                        .replace('<!-- Products Placeholder -->', generateProductsHTML(products))
+                        .replace('<!-- Blogs Placeholder -->', generateBlogsHTML(blogs));
+
+                    response.writeHead(200, {'Content-Type': 'text/html'});
+                    response.write(profileContent);
+                    response.end();
+                });
+            }).catch(err => {
+                console.error('Database query error:', err);
+                response.writeHead(500, {'Content-Type': 'text/html'});
+                response.write('Error fetching profile details');
+                response.end();
+            });
+        })
+        .catch(err => {
+            console.error('Database query error:', err);
+            response.writeHead(500, {'Content-Type': 'text/html'});
+            response.write('Error fetching profile details');
+            response.end();
+        });
+}
+
+function generateProductsHTML(products) {
+    if (products.length === 0) {
+        return '<p>No products found.</p>';
+    }
+    return products.map(product => `
+        <article>
+            <img src="${product.image_url}" alt="${product.name}">
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>$${product.price.toFixed(2)}</p>
+                <button onclick="location.href='product-detail.html?id=${product.id}'">Details</button>
+            </div>
+        </article>
+    `).join('');
+}
+
+function generateBlogsHTML(blogs) {
+    if (blogs.length === 0) {
+        return '<p>No blog posts found.</p>';
+    }
+    return blogs.map(blog => `
+        <article>
+            <img src="${blog.image_url}" alt="${blog.title}">
+            <div class="blog-content">
+                <div class="blog-info">
+                    <span class="date">${new Date(blog.date).toLocaleDateString()}</span> |
+                    <span class="tags">${blog.tags}</span>
+                </div>
+                <h3>${blog.title}</h3>
+                <button onclick="location.href='blog-page.html?blogId=${blog.id}'">Read More</button>
+            </div>
+        </article>
+    `).join('');
+}
+
+
 
 
 
@@ -684,15 +910,19 @@ const server = http.createServer(function(request, response) {
             serveCSS(request, response);
         } else if (request.url === '/' || request.url === '/home.html') {
             serveHome(request, response);
+        } else if (request.url.startsWith('/shop-filter')) {
+            serveFilteredShop(request, response, parsedUrl.query);
         } else if (request.url === '/shop.html') {
             serveShop(request, response);
-        } else  if (request.url.startsWith('/filter')) {
-            serveFilteredShop(request, response, parsedUrl.query);
         } else if (pathname === '/blog-page.html') {
             serveBlogPage(request, response);
         } else if (request.url.startsWith('/blog')) {
             serveBlog(request, response);
-        } else if (request.method === 'POST' && request.url === '/signin') {
+        } else if (parsedUrl.pathname === '/product-detail.html') {
+            serveProductDetailPage(request, response);
+        } else if (request.url.startsWith('/profile-page.html')) {
+            serveProfilePage(request, response);
+        }else if (request.method === 'POST' && request.url === '/signin') {
             collectRequestData(request, async (data) => {
                 try {
                     const { email, password } = JSON.parse(data);
