@@ -281,20 +281,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password_hash` varchar(512) NOT NULL,
   `date_of_birth` date DEFAULT NULL,
   `address` varchar(150) DEFAULT NULL,
+  `pfp_url` varchar(150) NOT NULL DEFAULT 'images/default-pfp.jpg',
   `email_visibility` bit(1) DEFAULT NULL,
   `date_of_birth_visibility` bit(1) DEFAULT NULL,
   `address_visibility` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.users: ~5 rows (approximately)
-INSERT IGNORE INTO `users` (`id`, `username`, `name`, `email`, `password_hash`, `date_of_birth`, `address`, `email_visibility`, `date_of_birth_visibility`, `address_visibility`) VALUES
-	(1, 'admin', 'Web Gardening', 'admin@webgardening.example.com', '$2y$2y$10$m85uJjzXr7y1rCG7PtDuhuncwvfQ2x4oE.t0Qgmb6SSLEogthvEyK', NULL, NULL, NULL, NULL, NULL),
-	(2, 'LucasGreenfield', 'Lucas Greenfield', 'lucas.greenfield@example.com', '$2y$10$3T31u7U9pRXEYxM2hzY3y.ZSt6BIEWZZggfJ5g0JhNWwiqpLb1e/S', NULL, NULL, NULL, NULL, NULL),
-	(3, 'AnitaBloom', 'Anita Bloom', 'anita.bloom@example.com', '$2y$10$g2L8QO6cYLrRCAZwHg6pCuHDC81BvlsbVQnOne67GuHx9HGKGkE2K', NULL, NULL, NULL, NULL, NULL),
-	(4, 'DandyLion', 'Dandy Lion', 'dandy.lion@example.com', '$2y$10$wRurNvd4EihEQH.Wc2BdY.EnD2kfyPMflIoRzVb4FllMS50Te5OTS', NULL, NULL, NULL, NULL, NULL),
-	(5, 'EmilyThorn', 'Emily Thorn', 'emily.thorn@example.com', '$2y$10$hXgBDf2UoqapkgQR7C3Bv.CQUIATSM0dr2PMwkhnRB01QgOORaPW.', NULL, NULL, NULL, NULL, NULL),
-	(6, 'EpicFace', 'Florea Florin-Cosmin', 'cosminflorin12@gmail.com', '$2y$10$gJf2wDareswXjWSgIvOqku9sxrtZM1P4xO2EDzqydslOACPp0Quxu', '1980-01-01', '123 Floral Street, Petal City', NULL, NULL, NULL);
+-- Dumping data for table webgardening.users: ~6 rows (approximately)
+INSERT IGNORE INTO `users` (`id`, `username`, `name`, `email`, `password_hash`, `date_of_birth`, `address`, `pfp_url`, `email_visibility`, `date_of_birth_visibility`, `address_visibility`) VALUES
+	(1, 'admin', 'Web Gardening', 'admin@webgardening.example.com', '$2y$2y$10$m85uJjzXr7y1rCG7PtDuhuncwvfQ2x4oE.t0Qgmb6SSLEogthvEyK', NULL, NULL, 'images/default-pfp.jpg', NULL, NULL, NULL),
+	(2, 'LucasGreenfield', 'Lucas Greenfield', 'lucas.greenfield@example.com', '$2y$10$3T31u7U9pRXEYxM2hzY3y.ZSt6BIEWZZggfJ5g0JhNWwiqpLb1e/S', NULL, NULL, 'images/default-pfp.jpg', NULL, NULL, NULL),
+	(3, 'AnitaBloom', 'Anita Bloom', 'anita.bloom@example.com', '$2y$10$g2L8QO6cYLrRCAZwHg6pCuHDC81BvlsbVQnOne67GuHx9HGKGkE2K', NULL, NULL, 'images/default-pfp.jpg', NULL, NULL, NULL),
+	(4, 'DandyLion', 'Dandy Lion', 'dandy.lion@example.com', '$2y$10$wRurNvd4EihEQH.Wc2BdY.EnD2kfyPMflIoRzVb4FllMS50Te5OTS', NULL, NULL, 'images/default-pfp.jpg', NULL, NULL, NULL),
+	(5, 'EmilyThorn', 'Emily Thorn', 'emily.thorn@example.com', '$2y$10$hXgBDf2UoqapkgQR7C3Bv.CQUIATSM0dr2PMwkhnRB01QgOORaPW.', NULL, NULL, 'images/default-pfp.jpg', NULL, NULL, NULL),
+	(6, 'EpicFace', 'Florea Florin-Cosmin', 'cosminflorin12@gmail.com', '$2y$10$gJf2wDareswXjWSgIvOqku9sxrtZM1P4xO2EDzqydslOACPp0Quxu', '1980-01-01', '123 Floral Street, Petal City', 'images/profile-picture.png', NULL, NULL, NULL);
 
 -- Dumping structure for table webgardening.wishlist
 CREATE TABLE IF NOT EXISTS `wishlist` (
