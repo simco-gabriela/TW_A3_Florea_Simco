@@ -48,19 +48,17 @@ body {
     margin: 0 0 10px;
 }
 
+
 .read-more-btn {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
     padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-}
-
-.read-more-btn:hover {
-    background-color: #449d44;
+    display: block; 
+    width: fit-content;
 }
 
 .sidebar {
