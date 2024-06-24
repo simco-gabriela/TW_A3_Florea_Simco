@@ -126,8 +126,8 @@ CREATE TABLE IF NOT EXISTS `cart` (
 
 -- Dumping data for table webgardening.cart: ~2 rows (approximately)
 REPLACE INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `added_on`) VALUES
-	(1, 6, 1, 2, '2024-06-05'),
-	(2, 6, 2, 3, '2024-06-03');
+	(1, 6, 1, 1, '2024-06-05'),
+	(3, 6, 2, 1, '2024-06-24');
 
 -- Dumping structure for table webgardening.gardens
 CREATE TABLE IF NOT EXISTS `gardens` (
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `inbox` (
 -- Dumping data for table webgardening.inbox: ~2 rows (approximately)
 REPLACE INTO `inbox` (`id`, `user_id`, `type`, `timestamp`, `sender`) VALUES
 	(1, 6, 'Interested in your blue bells', '2024-05-31 21:00:00', 'emily.thorn@example.com'),
-	(2, 6, 'Interested in your blue bells', '2024-06-19 20:36:34', 'dandy.lion@example.com');
+	(2, 5, 'Interested in your blue bells', '2024-06-19 20:36:34', 'dandy.lion@example.com');
 
 -- Dumping structure for table webgardening.orders
 CREATE TABLE IF NOT EXISTS `orders` (
