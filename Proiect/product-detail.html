@@ -17,9 +17,10 @@
         <h1>Product details</h1>
     </div>
 
-    <div class="shop-container single-product">
+    <div class="shop-container single-product" data-product-id="{{productId}}">
         <div class="shop-col-1">
             <!-- Image Placeholder -->
+            <!-- Product ID Placeholder -->
         </div>
         <div class="shop-col-2">
             <h1><!-- Product Name Placeholder --></h1>
@@ -28,15 +29,11 @@
             <p><!-- Category Placeholder --></p>
             <p><!-- Color Placeholder --></p>
             <h4><!-- Price Placeholder --></h4>
-            <select>
-                <option>Select Size</option>
-                <option>Small</option>
-                <option>Medium</option>
-                <option>Big</option>
-            </select>
-            <h4>Select quantity</h4>
-            <input type="number" value="1">
-            <a class="button" href="">Add To Cart</a>
+            <div id="purchase-options" style="display: none;">
+                <h4>Select quantity</h4>
+                <input type="number" value="1" min="1" id="product-quantity">
+                <button class="button" onclick="addToCart()">Add To Cart</button>
+            </div>
             <h3>Product Details</h3>
             <p><!-- Product Description Placeholder --></p>
         </div>
@@ -52,6 +49,46 @@
     <div id="footer"></div>
 
     <script src = "js/navbar_and_footer.js"> </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const isAuthenticated = localStorage.getItem('jwtToken'); 
+    if (isAuthenticated) {
+        document.getElementById('purchase-options').style.display = 'block';
+    }
+
+});
+
+function addToCart() {
+    const productId = document.getElementById('product-id').value;
+    const quantityInput = document.getElementById('product-quantity');
+    const quantity = quantityInput.value;
+    const token = localStorage.getItem('jwtToken');
+
+    fetch('/add-to-cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, quantity, token })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Product added to cart successfully!');
+        } else {
+            alert('Failed to add product to cart: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Failed to add product to cart', error);
+    });
+    console.log('User ID:', userId, 'Product ID:', productId, 'Quantity:', quantity);
+
+}
+
+
+    </script>
 </body>
 
 </html>
