@@ -39,12 +39,14 @@ document.addEventListener('DOMContentLoaded', function () {
     signupForm.addEventListener('submit', function (event) {
         event.preventDefault();
         console.log("Sign-up form submitted");
-        const firstName = document.querySelector('[name="firstName"]').value;
-        const lastName = document.querySelector('[name="lastName"]').value;
-        const email = document.querySelector('[name="email"]').value;
-        const password = document.querySelector('[name="password"]').value;
-        console.log(firstName, lastName, email, password);
-        performSignUp(firstName, lastName, email, password);
+        const firstName = document.querySelector('[name="signupFirstName"]').value;
+        const lastName = document.querySelector('[name="signupLastName"]').value;
+        const email = document.querySelector('[name="signupEmail"]').value;
+        const password = document.querySelector('[name="signupPassword"]').value;
+        const confirmPassword = document.querySelector('[name="signupConfirmPassword"]').value;
+    
+        console.log(firstName, lastName, email, password, confirmPassword);
+        performSignUp(firstName, lastName, email, password, confirmPassword);
     });
 });
 
@@ -88,32 +90,32 @@ function performSignIn(email, password) {
 
 
 
+function performSignUp(firstName, lastName, email, password, confirmPassword) {
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+    const username = (firstName + lastName).replace(/\s+/g, ''); // Remove all spaces
+    console.log(`Generated username: ${username}`);
 
-function performSignUp(username, name, email, password) {
     fetch('/signup', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, name, email, password }),
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            username,
+            name: firstName + " " + lastName,
+            email,
+            password
+        })
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Server response:', data);
-
-            //save JWT to not cookies thinghy
-
-            //redirect to home page
-
-            // Handle success response (e.g., show confirmation, redirect)
-        })
-        .catch(error => {
-            console.error('Sign-up error:', error);
-            // Handle error (e.g., display error message to user)
-        });
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert('Signup successful, please sign in.');
+            window.location.href = 'sign.html'; // Redirect to the sign-in page after successful sign-up
+        }
+    })
+    .catch(error => {
+        alert('Sign-up error: ' + error.message);
+    });
 }
