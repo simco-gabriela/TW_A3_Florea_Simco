@@ -6,7 +6,8 @@ const MariaDBConnection = require('./db.js');
 const Auth = require('./auth.js'); 
 const url = require('url');
 const querystring = require('querystring');
-
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = 'XDD';
 
 
 // Router functions
@@ -712,6 +713,7 @@ function serveProductDetailPage(request, response) {
                         .replace('<!-- Color Placeholder -->', `Color: ${product.color}`)
                         .replace('<!-- Price Placeholder -->', `$${product.price.toFixed(2)}`)
                         .replace('<!-- Product Description Placeholder -->', product.description)
+                        .replace('<!-- Product ID Placeholder -->', `<input type="hidden" id="product-id" value="${product.id}">`)
                         .replace('<!-- Recommended Products Placeholder -->', recommendedHtml);
 
                     response.writeHead(200, {'Content-Type': 'text/html'});
@@ -726,6 +728,7 @@ function serveProductDetailPage(request, response) {
             response.end();
         });
 }
+
 
 
 function serveProfilePage(request, response) {
@@ -851,6 +854,132 @@ function generateBlogsHTML(blogs) {
     `).join('');
 }
 
+function serveCartPage(request, response) {
+    collectRequestData(request, async (data) => {
+        try {
+            const { token } = JSON.parse(data);
+            const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+            if (!decoded) {
+                throw new Error('Invalid token');
+            }
+
+            const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
+            if (userResult.length === 0) {
+                throw new Error('User not found');
+            }
+            const userId = userResult[0].id;
+
+            const cartItems = await MariaDBConnection.query(`
+                SELECT p.id, p.name, p.image_url, p.price, c.quantity 
+                FROM cart c 
+                JOIN products p ON c.product_id = p.id 
+                WHERE c.user_id = ?`, [userId]);
+
+            let cartHtml = '';
+            let subtotal = 0;
+
+            if (cartItems.length > 0) {
+                cartHtml = cartItems.map(item => {
+                    const itemTotal = item.quantity * item.price;
+                    subtotal += itemTotal;
+                    return `
+                        <tr>
+                            <td>
+                                <div class="cart-info">
+                                    <img src="${item.image_url}" alt="${item.name}">
+                                    <div>
+                                        <p>${item.name}</p>
+                                        <small>Price: $${item.price.toFixed(2)}</small>
+                                        <br>
+                                        <a href="#" onclick="removeFromCart(${item.id})">Remove</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><input type="number" value="${item.quantity}" onchange="updateQuantity(${item.id}, this.value)"></td>
+                            <td>$${itemTotal.toFixed(2)}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } else {
+                cartHtml = '<tr><td><div class="cart-info" <p>Your cart is empty.</p> </div></td></tr>';
+            }
+
+            const tax = subtotal * 0.1; // Assuming a tax rate of 10%
+            const total = subtotal + tax;
+            let buttonHtml = total > 0 ? `<button id="proceed-to-payment" class="button" onclick="window.location.href='payment.html'">Proceed to Payment</button>` : '';
+
+
+            fs.readFile(path.join(__dirname, '..', 'cart.html'), 'utf8', (err, htmlData) => {
+                if (err) {
+                    response.writeHead(500, {'Content-Type': 'text/html'});
+                    response.write('Error loading the cart page');
+                    response.end();
+                    return;
+                }
+
+                htmlData = htmlData
+                    .replace('<!-- Cart Items Placeholder -->', cartHtml)
+                    .replace('<!-- Subtotal Placeholder -->', `$${subtotal.toFixed(2)}`)
+                    .replace('<!-- Tax Placeholder -->', `$${tax.toFixed(2)}`)
+                    .replace('<!-- Total Placeholder -->', `$${total.toFixed(2)}`)
+                    .replace('<!-- Proceed to Payment Placeholder -->', buttonHtml);
+
+
+                response.writeHead(200, {'Content-Type': 'text/html'});
+                response.write(htmlData);
+                response.end();
+            });
+        } catch (error) {
+            console.error('Error serving cart page:', error);
+            response.writeHead(500, {'Content-Type': 'text/html'});
+            response.write('Failed to serve cart page');
+            response.end();
+        }
+    });
+}
+
+async function processPaymentAndPlaceOrder(userId, orderDetails) {
+    try {
+        // Simulate payment authorization
+        if (!authorizePayment(orderDetails.cardNumber, orderDetails.cvv, orderDetails.expMonth, orderDetails.expYear)) {
+            return { success: false, message: "Payment authorization failed" };
+        }
+
+        // Calculate the total amount from the cart
+        const cartItems = await MariaDBConnection.query(`
+            SELECT c.product_id, c.quantity, p.price 
+            FROM cart c 
+            JOIN products p ON c.product_id = p.id 
+            WHERE c.user_id = ?`, [userId]);
+
+        const totalAmount = cartItems.reduce((acc, item) => acc + (item.quantity * item.price), 0);
+
+        // Insert the new order
+        const orderResult = await MariaDBConnection.query('INSERT INTO orders (user_id, amount, status, date) VALUES (?, ?, "Processing", NOW())', [userId, totalAmount]);
+        const orderId = orderResult.insertId;
+
+        // Insert order details
+        for (const item of cartItems) {
+            await MariaDBConnection.query('INSERT INTO orders_details (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)', [orderId, item.product_id, item.quantity, item.price]);
+        }
+
+        // Empty the user's cart
+        await MariaDBConnection.query('DELETE FROM cart WHERE user_id = ?', [userId]);
+
+        return { success: true };
+    } catch (error) {
+        console.error('Failed to process order:', error);
+        return { success: false, message: error.message };
+    }
+}
+
+function authorizePayment(cardNumber, cvv, expMonth, expYear) {
+    return cardNumber.length === 16 && cvv.length === 3 && expMonth.length === 2 && expYear.length === 4;
+}
+
+
+
+
 function serveStaticFiles(request, response) {
     const filePath = path.join(__dirname, '..', request.url);
     const ext = path.extname(filePath);
@@ -887,6 +1016,8 @@ function serveStaticFiles(request, response) {
     });
 }
 
+
+
 const server = http.createServer(function(request, response) {
     const parsedUrl = url.parse(request.url, true); // True to parse query as object
     const pathname = parsedUrl.pathname; // Get the path without query string
@@ -904,13 +1035,132 @@ const server = http.createServer(function(request, response) {
             serveShop(request, response);
         } else if (pathname === '/blog-page.html') {
             serveBlogPage(request, response);
-        } else if (request.url.startsWith('/blog.html')) {
+        } else if (request.url.startsWith('/blog')) {
             serveBlog(request, response);
         } else if (parsedUrl.pathname === '/product-detail.html') {
             serveProductDetailPage(request, response);
         } else if (request.url.startsWith('/profile-page.html')) {
             serveProfilePage(request, response);
-        }else if (request.method === 'POST' && request.url === '/signin') {
+        } else if (request.method === 'POST' && pathname === '/add-to-cart') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const { productId, quantity, token } = JSON.parse(data);
+    
+                    const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+                    if (!decoded) {
+                        throw new Error('Invalid token');
+                    }
+    
+                    const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
+                    if (userResult.length === 0) {
+                        throw new Error('User not found');
+                    }
+                    const userId = userResult[0].id;
+    
+                    const cartResult = await MariaDBConnection.query('SELECT * FROM cart WHERE user_id = ? AND product_id = ?', [userId, productId]);
+                    if (cartResult.length > 0) {
+                        await MariaDBConnection.query('UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?', [quantity, userId, productId]);
+                    } else {
+                        await MariaDBConnection.query('INSERT INTO cart (user_id, product_id, quantity, added_on) VALUES (?, ?, ?, NOW())', [userId, productId, quantity]);
+                    }
+    
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: true, message: 'Product added to cart' }));
+                } catch (error) {
+                    console.error('Error adding to cart:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: false, message: 'Failed to add product to cart' }));
+                }
+            });
+        } else if (request.method === 'POST' && pathname === '/remove-from-cart') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const { productId, token } = JSON.parse(data);
+                    const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+                    if (!decoded) {
+                        throw new Error('Invalid token');
+                    }
+        
+                    const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
+                    if (userResult.length === 0) {
+                        throw new Error('User not found');
+                    }
+                    const userId = userResult[0].id;
+        
+                    await MariaDBConnection.query('DELETE FROM cart WHERE user_id = ? AND product_id = ?', [userId, productId]);
+        
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: true, message: 'Item removed from cart' }));
+                } catch (error) {
+                    console.error('Error removing from cart:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: false, message: 'Failed to remove item from cart' }));
+                }
+            });
+        } else if (request.method === 'POST' && pathname === '/update-cart') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const { productId, quantity, token } = JSON.parse(data);
+                    const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+                    if (!decoded) {
+                        throw new Error('Invalid token');
+                    }
+        
+                    const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
+                    if (userResult.length === 0) {
+                        throw new Error('User not found');
+                    }
+                    const userId = userResult[0].id;
+        
+                    await MariaDBConnection.query('UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?', [quantity, userId, productId]);
+        
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: true, message: 'Cart updated' }));
+                } catch (error) {
+                    console.error('Error updating cart:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: false, message: 'Failed to update cart' }));
+                }
+            });
+        } else if (request.method === 'POST' && pathname === '/cart.html') {
+            serveCartPage(request, response);
+        } else if (request.method === 'POST' && pathname === '/submit-payment') {
+            collectRequestData(request, async (data) => {
+                try {
+                    // Parse the JSON body to extract the token and payment details
+                    const { token, ...paymentDetails } = JSON.parse(data);
+        
+                    // Verify the token to decode and validate it
+                    if (!token) {
+                        throw new Error('JWT must be provided');
+                    }
+                    const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+                    if (!decoded) {
+                        throw new Error('Invalid token');
+                    }
+        
+                    // Retrieve user ID from the database based on the username decoded from the JWT
+                    const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
+                    if (userResult.length === 0) {
+                        throw new Error('User not found');
+                    }
+                    const userId = userResult[0].id;
+        
+                    // Process the payment and place the order using the payment details and user ID
+                    const orderResult = await processPaymentAndPlaceOrder(userId, paymentDetails);
+                    if (orderResult.success) {
+                        response.writeHead(200, { 'Content-Type': 'application/json' });
+                        response.end(JSON.stringify({ success: true, message: 'Order submitted successfully!' }));
+                    } else {
+                        throw new Error(orderResult.message || 'Order processing failed');
+                    }
+                } catch (error) {
+                    console.error('Payment processing error:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: false, message: error.message }));
+                }
+            });
+        } else if (request.method === 'POST' && request.url === '/signin') {
             collectRequestData(request, async (data) => {
                 try {
                     const { email, password } = JSON.parse(data);
@@ -949,7 +1199,7 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: 'Server error' }));
                 }
             });
-        }else if (request.method === 'POST' && request.url === '/get-acc-reviews') {
+        } else if (request.method === 'POST' && request.url === '/get-acc-reviews') {
             collectRequestData(request, async (data) => {
                 try {
                     const {token} = JSON.parse(data);
@@ -977,8 +1227,7 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: 'Server error' }));
                 }
             });
-        }
-        else {
+        } else {
             serveStaticFiles(request, response);
         }
     } catch (error) {
