@@ -1035,7 +1035,7 @@ const server = http.createServer(function(request, response) {
             serveShop(request, response);
         } else if (pathname === '/blog-page.html') {
             serveBlogPage(request, response);
-        } else if (request.url.startsWith('/blog.html')) {
+        } else if (request.url.startsWith('/blog')) {
             serveBlog(request, response);
         } else if (parsedUrl.pathname === '/product-detail.html') {
             serveProductDetailPage(request, response);
@@ -1181,7 +1181,7 @@ const server = http.createServer(function(request, response) {
                     response.writeHead(201, { 'Content-Type': 'application/json' });
                     response.end(JSON.stringify(result));
                 } catch (error) {
-                    console.error('Sign-up error:', error.message);
+                    console.error('Sign-up error:', error);
                     response.writeHead(500, { 'Content-Type': 'application/json' });
                     response.end(JSON.stringify({ error: error.message }));
                 }
@@ -1253,7 +1253,7 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: 'Server error' }));
                 }
             });
-        } else if (request.method === 'POST' && request.url === '/get-my-blogs') {
+        }  else if (request.method === 'POST' && request.url === '/get-my-blogs') {
             collectRequestData(request, async (data) => {
                 try {
                     const { token } = JSON.parse(data);
@@ -1268,7 +1268,7 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: 'Server error' }));
                 }
             });
-        }else {
+        } else {
             serveStaticFiles(request, response);
         }
     } catch (error) {
