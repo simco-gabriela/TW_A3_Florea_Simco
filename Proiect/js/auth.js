@@ -36,13 +36,13 @@ class Auth {
         return { message: 'Signin successful!', token: jwt.sign({ username: user.username }, SECRET_KEY, { algorithm: 'HS256' }) };
     }
     
-    // TO DO: Move this to another class and centralize SECRET_KEY
+    
     static async getCurrentAccountData(token){
         const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
         if(!decoded) {
             throw new Error('Invalid token');
         }
-        console.log("username ", decoded.username);
+
 
         const result = await MariaDBConnection.query('SELECT * FROM users WHERE username = ?', [decoded.username]);
         if (result.length === 0) {
@@ -64,7 +64,7 @@ class Auth {
         if (!decoded) {
             throw new Error('Invalid token');
         }
-        console.log("username ", decoded.username);
+
         const result = await MariaDBConnection.query('SELECT r.*, p.image_url FROM reviews r JOIN products p ON r.product_id = p.id WHERE r.username = ?', [decoded.username]);
         
         if (result.length === 0) {
@@ -81,6 +81,49 @@ class Auth {
         }));
     
         return reviews;
+    }
+
+    static async getCurrentAccountOrders(token) {
+        const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+        if (!decoded) {
+            throw new Error('Invalid token');
+        }
+
+        const result = await MariaDBConnection.query('SELECT p.image_url, o.date, o.status, od.price, u.username FROM orders_details od JOIN products p ON od.product_id = p.id JOIN orders o ON od.order_id = o.id JOIN users u ON o.user_id = u.id WHERE u.username = ?', [decoded.username]);
+        
+        if (result.length === 0) {
+            return null;
+        }
+
+        const orders = result.map(user => ({
+            username: user.username,
+            date: user.date,
+            image_url: user.image_url,
+            status: user.status,
+            price: user.price
+        }));
+    
+        return orders;
+    }
+
+    static async getCurrentAccountInbox(token) {
+        const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+        if (!decoded) {
+            throw new Error('Invalid token');
+        }
+        const result = await MariaDBConnection.query('SELECT i.type, i.timestamp, i.sender FROM inbox i JOIN users u ON i.user_id = u.id WHERE u.username = ? ORDER BY i.timestamp DESC;', [decoded.username]);
+        
+        if (result.length === 0) {
+            return null;
+        }
+
+        const inbox = result.map(user => ({
+            date: user.timestamp,
+            sender: user.sender,
+            type: user.type,
+        }));
+    
+        return inbox;
     }
     
 

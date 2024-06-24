@@ -35,7 +35,6 @@ function generateStarRating(rating) {
 function populateReviewsData(data) {
     const reviewsDiv = document.getElementById('reviews-section');
     reviewsDiv.innerHTML = '';
-    console.log(data);
 
     if (data) {
         const reviewsHTML = data.map(review => `
@@ -53,12 +52,35 @@ function populateReviewsData(data) {
     }
 }
 
+function populateOrdersData(data) {
+    const ordersDiv = document.getElementById('inbox-messages');
+    ordersDiv.innerHTML = '';
+
+    if (data) {
+        const ordersHTML = data.map(review => `
+            <div class="order">
+                <div class="order-images">
+                    <img src="${review.image_url}" alt="Order Item" class="order-image">
+                </div>
+                <div class="order-details">
+                    <h3>Order Date: ${review.date.substring(0,10)} ${review.date.substring(11,16)}</h3>
+                    <p>Status: ${review.status}</p>
+                    <p>Total Price: $${review.price}</p>
+                </div>
+            </div>
+        `).join('');
+        
+        ordersDiv.innerHTML = ordersHTML;
+    }
+}
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
     toggleSection('account-details');
     setAccountData();
     setReviewsData();
+    setOrdersData();
 });
 
 function setAccountData(){
@@ -120,6 +142,39 @@ function setReviewsData(){
                 
                 console.log('Get Reviews was successful!');
                 populateReviewsData(data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error.message);
+            // Handle network errors or unexpected server errors
+        });
+}
+
+function setOrdersData(){
+    fetch('/get-acc-orders', {
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: localStorage.getItem('jwtToken') }),
+    })
+        .then(response => {
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Server response:', data);
+            if (data.error) {
+                console.error('Orders error:', data.error);
+                // Handle specific error cases if needed
+            } else {
+                
+                console.log('Get Orders was successful!');
+                populateOrdersData(data);
             }
         })
         .catch(error => {

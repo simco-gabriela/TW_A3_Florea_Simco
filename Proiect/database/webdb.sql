@@ -146,26 +146,29 @@ CREATE TABLE IF NOT EXISTS `gardens` (
   PRIMARY KEY (`id`),
   KEY `FK_gardens_user_id` (`user_id`),
   CONSTRAINT `FK_gardens_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.gardens: ~1 rows (approximately)
+-- Dumping data for table webgardening.gardens: ~2 rows (approximately)
 REPLACE INTO `gardens` (`id`, `user_id`, `username`, `name`, `created_on`, `longitude`, `latitude`, `description`, `image`, `flower_type`, `color_type`, `is_shop`) VALUES
-	(1, 7, 'abc', 'test', '2024-06-24', 27.609, 47.1771, 'Here is the garden for my plantation of yellow tulips.', 'images/flower-example-tulip.jpg', 'tulip', 'yellow', b'0');
+	(1, 7, 'abc', 'test', '2024-06-24', 27.609, 47.1771, 'Here is the garden for my plantation of yellow tulips.', 'images/flower-example-tulip.jpg', 'tulip', 'yellow', b'0'),
+	(2, 6, 'EpicFace', 'Cosmin', '2024-06-22', 45.5985, 23.2045, 'I havea humble plantation of blue bells', 'images/flower-example-bluebell-purple.jpg', 'blue bells', 'purple', b'0');
 
 -- Dumping structure for table webgardening.inbox
 CREATE TABLE IF NOT EXISTS `inbox` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `message` longtext NOT NULL,
   `type` varchar(256) DEFAULT NULL,
   `timestamp` timestamp NOT NULL,
   `sender` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_inbox_user_id` (`user_id`),
   CONSTRAINT `FK_inbox_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.inbox: ~0 rows (approximately)
+-- Dumping data for table webgardening.inbox: ~2 rows (approximately)
+REPLACE INTO `inbox` (`id`, `user_id`, `type`, `timestamp`, `sender`) VALUES
+	(1, 6, 'Interested in your blue bells', '2024-05-31 21:00:00', 'emily.thorn@example.com'),
+	(2, 6, 'Interested in your blue bells', '2024-06-19 20:36:34', 'dandy.lion@example.com');
 
 -- Dumping structure for table webgardening.orders
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -177,9 +180,12 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   KEY `FK_orders_user_id` (`user_id`),
   CONSTRAINT `FK_orders_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.orders: ~0 rows (approximately)
+-- Dumping data for table webgardening.orders: ~2 rows (approximately)
+REPLACE INTO `orders` (`id`, `user_id`, `amount`, `status`, `date`) VALUES
+	(1, 6, 10, 'delivered', '2024-06-24 19:37:30'),
+	(2, 6, 3, 'shipped', '2024-06-22 15:42:45');
 
 -- Dumping structure for table webgardening.orders_details
 CREATE TABLE IF NOT EXISTS `orders_details` (
@@ -193,9 +199,12 @@ CREATE TABLE IF NOT EXISTS `orders_details` (
   KEY `FK_ord_det_prod_id` (`product_id`),
   CONSTRAINT `FK_ord_det_ord_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_ord_det_prod_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.orders_details: ~0 rows (approximately)
+-- Dumping data for table webgardening.orders_details: ~2 rows (approximately)
+REPLACE INTO `orders_details` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
+	(1, 1, 3, 3, 39),
+	(2, 2, 3, 1, 13);
 
 -- Dumping structure for table webgardening.products
 CREATE TABLE IF NOT EXISTS `products` (

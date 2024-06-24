@@ -2,8 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const port = 3000;
-const MariaDBConnection = require('./db.js'); 
-const Auth = require('./auth.js'); 
+const MariaDBConnection = require('./db.js');
+const Auth = require('./auth.js');
 const url = require('url');
 const querystring = require('querystring');
 const jwt = require('jsonwebtoken');
@@ -14,13 +14,13 @@ const SECRET_KEY = 'XDD';
 function serveCSS(request, response) {
     if (request.url.endsWith('.css')) {
         const cssPath = path.join(__dirname, '..', request.url);
-        fs.readFile(cssPath, 'utf8', function(error, data) {
+        fs.readFile(cssPath, 'utf8', function (error, data) {
             if (error) {
-                response.writeHead(404, {'Content-Type': 'text/html'});
+                response.writeHead(404, { 'Content-Type': 'text/html' });
                 response.write('Error: CSS File Not Found');
                 response.end(); // End response after writing error message
             } else {
-                response.writeHead(200, {'Content-Type': 'text/css'});
+                response.writeHead(200, { 'Content-Type': 'text/css' });
                 response.write(data);
                 response.end(); // End response after writing data
             }
@@ -31,16 +31,16 @@ function serveCSS(request, response) {
 function serveHome(request, response) {
     if (request.url === '/' || request.url === '/home.html') {
         const homePath = path.join(__dirname, '..', 'home.html');
-        fs.readFile(homePath, 'utf8', function(error, data) {
+        fs.readFile(homePath, 'utf8', function (error, data) {
             if (error) {
-                response.writeHead(404, {'Content-Type': 'text/html'});
+                response.writeHead(404, { 'Content-Type': 'text/html' });
                 response.write('Error: Home File Not Found');
                 response.end();
             } else {
                 // Fetch and embed blog and product data into the HTML
                 fetchBlogs((err, blogs) => {
                     if (err) {
-                        response.writeHead(500, {'Content-Type': 'text/html'});
+                        response.writeHead(500, { 'Content-Type': 'text/html' });
                         response.write('Error fetching blogs');
                         response.end();
                     } else {
@@ -61,7 +61,7 @@ function serveHome(request, response) {
 
                         fetchProducts((err, products) => {
                             if (err) {
-                                response.writeHead(500, {'Content-Type': 'text/html'});
+                                response.writeHead(500, { 'Content-Type': 'text/html' });
                                 response.write('Error fetching products');
                                 response.end();
                             } else {
@@ -78,8 +78,8 @@ function serveHome(request, response) {
                                 // Replace placeholder sections in the HTML with real data
                                 data = data.replace('<!-- Blogs Placeholder -->', blogsHtml);
                                 data = data.replace('<!-- Products Placeholder -->', productsHtml);
-                                
-                                response.writeHead(200, {'Content-Type': 'text/html'});
+
+                                response.writeHead(200, { 'Content-Type': 'text/html' });
                                 response.write(data);
                                 response.end();
                             }
@@ -93,16 +93,16 @@ function serveHome(request, response) {
 
 function serveShop(request, response) {
     const shopPath = path.join(__dirname, '..', 'shop.html');
-    fs.readFile(shopPath, 'utf8', function(error, data) {
+    fs.readFile(shopPath, 'utf8', function (error, data) {
         if (error) {
-            response.writeHead(404, {'Content-Type': 'text/html'});
+            response.writeHead(404, { 'Content-Type': 'text/html' });
             response.write('Error: Shop File Not Found');
             response.end();
         } else {
             // Make sure to pass a proper callback function here
             fetchShopProducts({}, (err, products) => { // Make sure you're passing an empty object for filters
                 if (err) {
-                    response.writeHead(500, {'Content-Type': 'text/html'});
+                    response.writeHead(500, { 'Content-Type': 'text/html' });
                     response.write('Error fetching products');
                     response.end();
                 } else {
@@ -117,8 +117,8 @@ function serveShop(request, response) {
 
                     // Replace the placeholder in the HTML content with the dynamically created products HTML
                     data = data.replace('<!-- Products Placeholder -->', productsHtml);
-                    
-                    response.writeHead(200, {'Content-Type': 'text/html'});
+
+                    response.writeHead(200, { 'Content-Type': 'text/html' });
                     response.write(data);
                     response.end();
                 }
@@ -171,16 +171,16 @@ function serveBlog(request, response) {
     const tagQuery = parsedUrl.query.tag || '';
     const category = parsedUrl.query.category || '';
 
-    fs.readFile(blogPath, 'utf8', function(error, data) {
+    fs.readFile(blogPath, 'utf8', function (error, data) {
         if (error) {
-            response.writeHead(404, {'Content-Type': 'text/html'});
+            response.writeHead(404, { 'Content-Type': 'text/html' });
             response.write('Error: Blog File Not Found');
             response.end();
         } else {
             // Fetch recent posts
             fetchRecentBlogs((err, recentPosts) => {
                 if (err) {
-                    response.writeHead(500, {'Content-Type': 'text/html'});
+                    response.writeHead(500, { 'Content-Type': 'text/html' });
                     response.write('Error fetching recent posts');
                     response.end();
                     return;
@@ -197,7 +197,7 @@ function serveBlog(request, response) {
                 // Fetch tags
                 fetchTags((err, tags) => {
                     if (err) {
-                        response.writeHead(500, {'Content-Type': 'text/html'});
+                        response.writeHead(500, { 'Content-Type': 'text/html' });
                         response.write('Error fetching tags');
                         response.end();
                     } else {
@@ -209,7 +209,7 @@ function serveBlog(request, response) {
                         // Determine which blog fetching function to call
                         function handleBlogs(err, blogs) {
                             if (err) {
-                                response.writeHead(500, {'Content-Type': 'text/html'});
+                                response.writeHead(500, { 'Content-Type': 'text/html' });
                                 response.write('Error fetching blogs');
                                 response.end();
                             } else {
@@ -227,11 +227,11 @@ function serveBlog(request, response) {
                                             <a href="blog-page.html?blogId=${blog.id}" class="read-more-btn">Read more</a>
                                         </div>
                                     </div>
-                                `).join('') : '<p>No results found for your search or tag.</p>';                                
+                                `).join('') : '<p>No results found for your search or tag.</p>';
 
                                 data = data.replace('<!-- Blog Posts Placeholder -->', blogsHtml);
-                                
-                                response.writeHead(200, {'Content-Type': 'text/html'});
+
+                                response.writeHead(200, { 'Content-Type': 'text/html' });
                                 response.write(data);
                                 response.end();
                             }
@@ -250,7 +250,7 @@ function serveBlog(request, response) {
                 });
             });
         }
-    }); 
+    });
 }
 
 function fetchBlogsByTag(tag, callback) {
@@ -328,7 +328,7 @@ function serveBlogPage(request, response) {
     const blogId = parsedUrl.query.blogId;
 
     if (!blogId) {
-        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.writeHead(404, { 'Content-Type': 'text/html' });
         response.write('Blog post not found');
         response.end();
         return;
@@ -348,7 +348,7 @@ function serveBlogPage(request, response) {
     MariaDBConnection.query(blogQuery, [blogId])
         .then(blogResults => {
             if (blogResults.length === 0) {
-                response.writeHead(404, {'Content-Type': 'text/html'});
+                response.writeHead(404, { 'Content-Type': 'text/html' });
                 response.write('Blog post not found');
                 response.end();
                 return;
@@ -358,7 +358,7 @@ function serveBlogPage(request, response) {
 
             fetchRecommendedBlogs(blog.id, blog.author_id, blog.tags, (err, recommendedBlogs) => {
                 if (err) {
-                    response.writeHead(500, {'Content-Type': 'text/html'});
+                    response.writeHead(500, { 'Content-Type': 'text/html' });
                     response.write('Error fetching recommended blogs');
                     response.end();
                     return;
@@ -398,9 +398,9 @@ function serveBlogPage(request, response) {
                             </div>
                         `).join('');
 
-                        fs.readFile(path.join(__dirname, '..', 'blog-page.html'), 'utf8', function(readError, data) {
+                        fs.readFile(path.join(__dirname, '..', 'blog-page.html'), 'utf8', function (readError, data) {
                             if (readError) {
-                                response.writeHead(404, {'Content-Type': 'text/html'});
+                                response.writeHead(404, { 'Content-Type': 'text/html' });
                                 response.write('Error: Blog Page File Not Found');
                                 response.end();
                                 return;
@@ -418,20 +418,20 @@ function serveBlogPage(request, response) {
                                 .replace('<!-- Comments Placeholder -->', commentsHtml)
                                 .replace('<!-- Recommended Blogs Placeholder -->', recommendedBlogsHtml);
 
-                            response.writeHead(200, {'Content-Type': 'text/html'});
+                            response.writeHead(200, { 'Content-Type': 'text/html' });
                             response.write(pageContent);
                             response.end();
                         });
                     })
                     .catch(err => {
-                        response.writeHead(500, {'Content-Type': 'text/html'});
+                        response.writeHead(500, { 'Content-Type': 'text/html' });
                         response.write('Error fetching comments');
                         response.end();
                     });
             });
         })
         .catch(err => {
-            response.writeHead(500, {'Content-Type': 'text/html'});
+            response.writeHead(500, { 'Content-Type': 'text/html' });
             response.write('Error fetching blog details');
             response.end();
         });
@@ -599,16 +599,16 @@ function fetchShopProducts(filters, callback) {
 
 function serveFilteredShop(request, response, queryParams) {
     const shopPath = path.join(__dirname, '..', 'shop.html');
-    fs.readFile(shopPath, 'utf8', function(error, data) {
+    fs.readFile(shopPath, 'utf8', function (error, data) {
         if (error) {
-            response.writeHead(404, {'Content-Type': 'text/html'});
+            response.writeHead(404, { 'Content-Type': 'text/html' });
             response.write('Error: Shop File Not Found');
             response.end();
         } else {
             // Filter based on query parameters
             fetchShopProducts(queryParams, (err, products) => {
                 if (err) {
-                    response.writeHead(500, {'Content-Type': 'text/html'});
+                    response.writeHead(500, { 'Content-Type': 'text/html' });
                     response.write('Error fetching products');
                     response.end();
                 } else {
@@ -622,7 +622,7 @@ function serveFilteredShop(request, response, queryParams) {
                     `).join('');
 
                     data = data.replace('<!-- Products Placeholder -->', productsHtml);
-                    response.writeHead(200, {'Content-Type': 'text/html'});
+                    response.writeHead(200, { 'Content-Type': 'text/html' });
                     response.write(data);
                     response.end();
                 }
@@ -654,7 +654,7 @@ function serveProductDetailPage(request, response) {
     const productId = parsedUrl.query.id;
 
     if (!productId) {
-        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.writeHead(404, { 'Content-Type': 'text/html' });
         response.write('Product not found');
         response.end();
         return;
@@ -669,7 +669,7 @@ function serveProductDetailPage(request, response) {
     MariaDBConnection.query(query, [productId])
         .then(results => {
             if (results.length === 0) {
-                response.writeHead(404, {'Content-Type': 'text/html'});
+                response.writeHead(404, { 'Content-Type': 'text/html' });
                 response.write('Product not found');
                 response.end();
                 return;
@@ -678,7 +678,7 @@ function serveProductDetailPage(request, response) {
             const product = results[0];
             fs.readFile(path.join(__dirname, '..', 'product-detail.html'), 'utf8', (err, data) => {
                 if (err) {
-                    response.writeHead(500, {'Content-Type': 'text/html'});
+                    response.writeHead(500, { 'Content-Type': 'text/html' });
                     response.write('Error loading the product detail page');
                     response.end();
                     return;
@@ -687,7 +687,7 @@ function serveProductDetailPage(request, response) {
                 // Fetch recommended products
                 fetchRecommendedProducts(product.id, product.seller_id, product.type, product.category, product.color, (recErr, recommendedProducts) => {
                     if (recErr) {
-                        response.writeHead(500, {'Content-Type': 'text/html'});
+                        response.writeHead(500, { 'Content-Type': 'text/html' });
                         response.write('Error fetching recommended products');
                         response.end();
                         return;
@@ -716,14 +716,14 @@ function serveProductDetailPage(request, response) {
                         .replace('<!-- Product ID Placeholder -->', `<input type="hidden" id="product-id" value="${product.id}">`)
                         .replace('<!-- Recommended Products Placeholder -->', recommendedHtml);
 
-                    response.writeHead(200, {'Content-Type': 'text/html'});
+                    response.writeHead(200, { 'Content-Type': 'text/html' });
                     response.write(pageContent);
                     response.end();
                 });
             });
         })
         .catch(err => {
-            response.writeHead(500, {'Content-Type': 'text/html'});
+            response.writeHead(500, { 'Content-Type': 'text/html' });
             response.write('Error fetching product details');
             response.end();
         });
@@ -736,7 +736,7 @@ function serveProfilePage(request, response) {
     const userId = parsedUrl.query.userId;
 
     if (!userId) {
-        response.writeHead(404, {'Content-Type': 'text/html'});
+        response.writeHead(404, { 'Content-Type': 'text/html' });
         response.write('Profile not found');
         response.end();
         return;
@@ -752,7 +752,7 @@ function serveProfilePage(request, response) {
     MariaDBConnection.query(userProfileQuery, [userId])
         .then(userResult => {
             if (userResult.length === 0) {
-                response.writeHead(404, {'Content-Type': 'text/html'});
+                response.writeHead(404, { 'Content-Type': 'text/html' });
                 response.write('Profile not found');
                 response.end();
                 return;
@@ -783,7 +783,7 @@ function serveProfilePage(request, response) {
                 fs.readFile(filePath, 'utf8', (err, data) => {
                     if (err) {
                         console.error('Error reading HTML file:', err);
-                        response.writeHead(500, {'Content-Type': 'text/html'});
+                        response.writeHead(500, { 'Content-Type': 'text/html' });
                         response.write('Error loading the profile detail page');
                         response.end();
                         return;
@@ -800,20 +800,20 @@ function serveProfilePage(request, response) {
                         .replace('<!-- Products Placeholder -->', generateProductsHTML(products))
                         .replace('<!-- Blogs Placeholder -->', generateBlogsHTML(blogs));
 
-                    response.writeHead(200, {'Content-Type': 'text/html'});
+                    response.writeHead(200, { 'Content-Type': 'text/html' });
                     response.write(profileContent);
                     response.end();
                 });
             }).catch(err => {
                 console.error('Database query error:', err);
-                response.writeHead(500, {'Content-Type': 'text/html'});
+                response.writeHead(500, { 'Content-Type': 'text/html' });
                 response.write('Error fetching profile details');
                 response.end();
             });
         })
         .catch(err => {
             console.error('Database query error:', err);
-            response.writeHead(500, {'Content-Type': 'text/html'});
+            response.writeHead(500, { 'Content-Type': 'text/html' });
             response.write('Error fetching profile details');
             response.end();
         });
@@ -1003,13 +1003,13 @@ function serveStaticFiles(request, response) {
             contentType = 'text/html';
     }
 
-    fs.readFile(filePath, function(error, data) {
+    fs.readFile(filePath, function (error, data) {
         if (error) {
-            response.writeHead(404, {'Content-Type': 'text/html'});
+            response.writeHead(404, { 'Content-Type': 'text/html' });
             response.write('Error: File Not Found');
             response.end(); // End response after writing error message
         } else {
-            response.writeHead(200, {'Content-Type': contentType});
+            response.writeHead(200, { 'Content-Type': contentType });
             response.write(data);
             response.end(); // End response after writing data
         }
@@ -1021,9 +1021,9 @@ function serveStaticFiles(request, response) {
 const server = http.createServer(function(request, response) {
     const parsedUrl = url.parse(request.url, true); // True to parse query as object
     const pathname = parsedUrl.pathname; // Get the path without query string
-  
+
     try {
-        console.log(`[${request.method}] request for [${request.url}]`,"Query:", parsedUrl.query);
+        console.log(`[${request.method}] request for [${request.url}]`, "Query:", parsedUrl.query);
 
         if (request.url.endsWith('.css')) {
             serveCSS(request, response);
@@ -1189,7 +1189,7 @@ const server = http.createServer(function(request, response) {
         } else if (request.method === 'POST' && request.url === '/get-acc-details') {
             collectRequestData(request, async (data) => {
                 try {
-                    const {token} = JSON.parse(data);
+                    const { token } = JSON.parse(data);
                     const result = await Auth.getCurrentAccountData(token);
                     response.writeHead(200, { 'Content-Type': 'application/json' });
                     response.end(JSON.stringify(result));
@@ -1202,7 +1202,7 @@ const server = http.createServer(function(request, response) {
         } else if (request.method === 'POST' && request.url === '/get-acc-reviews') {
             collectRequestData(request, async (data) => {
                 try {
-                    const {token} = JSON.parse(data);
+                    const { token } = JSON.parse(data);
                     const result = await Auth.getCurrentAccountReviews(token);
                     response.writeHead(200, { 'Content-Type': 'application/json' });
                     response.end(JSON.stringify(result));
@@ -1213,10 +1213,36 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: 'Server error' }));
                 }
             });
-        }  else if (request.method === 'POST' && request.url === '/get-my-garden') {
+        } else if (request.method === 'POST' && request.url === '/get-acc-orders') {
             collectRequestData(request, async (data) => {
                 try {
-                    const {token} = JSON.parse(data);
+                    const { token } = JSON.parse(data);
+                    const result = await Auth.getCurrentAccountOrders(token);
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify(result));
+                } catch (error) {
+                    console.error('Sign-in error:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ error: 'Server error' }));
+                }
+            });
+        } else if (request.method === 'POST' && request.url === '/get-acc-inbox') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const { token } = JSON.parse(data);
+                    const result = await Auth.getCurrentAccountInbox(token);
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify(result));
+                } catch (error) {
+                    console.error('Sign-in error:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ error: 'Server error' }));
+                }
+            });
+        } else if (request.method === 'POST' && request.url === '/get-my-garden') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const { token } = JSON.parse(data);
                     console.log('test');
                     const result = await Auth.getCurrentGardenData(token);
                     response.writeHead(200, { 'Content-Type': 'application/json' });
@@ -1246,7 +1272,7 @@ function collectRequestData(request, callback) {
     });
 }
 
-server.listen(port, function(error) {
+server.listen(port, function (error) {
     if (error) {
         console.log('Something went wrong', error);
     } else {
