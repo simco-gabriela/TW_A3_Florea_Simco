@@ -102,7 +102,7 @@ class Auth {
             image_url: user.image_url,
             status: user.status,
             price: user.price
-        }));
+        }));    
     
         return orders;
     }
@@ -175,11 +175,38 @@ class Auth {
 
     static async signup(username, name, email, password) {
         const passwordHash = this.hashPassword(password);
-        await MariaDBConnection.query(
-            'INSERT INTO user (username, name, email, password_hash) VALUES (?, ?, ?, ?)',
-            [username, name, email, passwordHash]
-        );
-        return { message: 'User created successfully' };
+        try {
+            // Insert the new user into the database
+            await MariaDBConnection.query(
+                'INSERT INTO users (username, name, email, password_hash) VALUES (?, ?, ?, ?)',
+                [username, name, email, passwordHash]
+            );
+
+            const userResult = await MariaDBConnection.query(
+                'SELECT id FROM users WHERE email = ?',
+                [email]
+            );
+
+            if (userResult.length === 0) {
+                console.log('No user found with that email after registration.');
+                throw new Error('Failed to retrieve user ID after signup');
+            }
+
+            const userId = userResult[0].id;
+            console.log('User ID retrieved: ', userId);
+
+            // Send a welcome message to the user's inbox
+            const inboxResult = await MariaDBConnection.query(
+                'INSERT INTO inbox (user_id, message, type, timestamp, sender) VALUES (?, ?, ?, NOW(), ?)',
+                [userId, 'Welcome to Web Gardening! We are thrilled to have you with us.', 'Welcome!', 'WebGardening']
+            );
+            console.log('Inbox entry result: ', inboxResult);
+
+            return { message: 'User created successfully', userId: userId };
+        } catch (error) {
+            console.error('Database error during signup: ' + error.message);
+            throw new Error('Database error during signup: ' + error.message);
+        }
     }
 }
 
