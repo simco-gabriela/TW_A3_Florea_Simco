@@ -1,11 +1,11 @@
-const TEMPERATURE_TAG = document.querySelector('#temperature-sensor');
-const HUMIDTY_TAG = document.querySelector('#humidity-sensor');
-const WEATHER_TAG = document.querySelector('#weather-sensor');
-const SOIL_MOISTURE_TAG = document.querySelector('#soil-moisture-sensor');
-const DESCRIPTION_TAG = document.querySelector('#garden-description');
-const TIP1_TAG = document.querySelector('#tip1');
-const TIP2_TAG = document.querySelector('#tip2');
-const SHOP_BUTTON_TAG = document.querySelector('#shop-button')
+let TEMPERATURE_TAG = document.querySelector('#temperature-sensor');
+let HUMIDTY_TAG = document.querySelector('#humidity-sensor');
+let WEATHER_TAG = document.querySelector('#weather-sensor');
+let SOIL_MOISTURE_TAG = document.querySelector('#soil-moisture-sensor');
+let DESCRIPTION_TAG = document.querySelector('#garden-description');
+let TIP1_TAG = document.querySelector('#tip1');
+let TIP2_TAG = document.querySelector('#tip2');
+let SHOP_BUTTON_TAG = document.querySelector('#shop-button')
 
 function populateGardenData(data) {
     DESCRIPTION_TAG.textContent = data.description;

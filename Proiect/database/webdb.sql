@@ -142,14 +142,15 @@ CREATE TABLE IF NOT EXISTS `gardens` (
   `image` varchar(50) DEFAULT NULL,
   `flower_type` varchar(50) DEFAULT NULL,
   `color_type` varchar(50) DEFAULT NULL,
+  `is_shop` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_gardens_user_id` (`user_id`),
   CONSTRAINT `FK_gardens_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.gardens: ~1 rows (approximately)
-REPLACE INTO `gardens` (`id`, `user_id`, `username`, `name`, `created_on`, `longitude`, `latitude`, `description`, `image`, `flower_type`, `color_type`) VALUES
-	(1, 7, 'abc', 'test', '2024-06-24', 27.609, 47.1771, 'Here is the garden for my plantation of yellow tulips.', 'images/flower-example-tulip.jpg', 'tulip', 'yellow');
+REPLACE INTO `gardens` (`id`, `user_id`, `username`, `name`, `created_on`, `longitude`, `latitude`, `description`, `image`, `flower_type`, `color_type`, `is_shop`) VALUES
+	(1, 7, 'abc', 'test', '2024-06-24', 27.609, 47.1771, 'Here is the garden for my plantation of yellow tulips.', 'images/flower-example-tulip.jpg', 'tulip', 'yellow', b'0');
 
 -- Dumping structure for table webgardening.inbox
 CREATE TABLE IF NOT EXISTS `inbox` (
@@ -242,6 +243,7 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `rating` double unsigned NOT NULL,
   `comment` longtext DEFAULT NULL,
   `created_on` timestamp NOT NULL,
@@ -253,13 +255,13 @@ CREATE TABLE IF NOT EXISTS `reviews` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- Dumping data for table webgardening.reviews: ~6 rows (approximately)
-REPLACE INTO `reviews` (`id`, `user_id`, `product_id`, `rating`, `comment`, `created_on`) VALUES
-	(1, 6, 1, 5, 'Great flower!', '2024-06-20 12:51:31'),
-	(2, 6, 11, 4.5, 'Smells magnificent!', '2024-06-18 12:52:42'),
-	(3, 6, 3, 5, 'Prettiest color!', '2024-06-12 12:53:08'),
-	(4, 6, 8, 4.8, 'Truly magestic!', '2024-06-02 12:54:03'),
-	(5, 6, 7, 5, 'Most beautiful tulips I have ever seen!', '2024-05-22 12:54:39'),
-	(6, 4, 7, 4.5, 'I am impressed!', '2024-05-22 12:55:02');
+REPLACE INTO `reviews` (`id`, `user_id`, `product_id`, `username`, `rating`, `comment`, `created_on`) VALUES
+	(1, 6, 1, 'EpicFace', 5, 'Great flower!', '2024-06-20 12:51:31'),
+	(2, 6, 11, 'EpicFace', 4.5, 'Smells magnificent!', '2024-06-18 12:52:42'),
+	(3, 6, 3, 'EpicFace', 5, 'Prettiest color!', '2024-06-12 12:53:08'),
+	(4, 6, 8, 'EpicFace', 4.8, 'Truly magestic!', '2024-06-02 12:54:03'),
+	(5, 6, 7, 'EpicFace', 5, 'Most beautiful tulips I have ever seen!', '2024-05-22 12:54:39'),
+	(6, 4, 7, 'Dandy Lion', 4.5, 'I am impressed!', '2024-05-22 12:55:02');
 
 -- Dumping structure for table webgardening.tags
 CREATE TABLE IF NOT EXISTS `tags` (

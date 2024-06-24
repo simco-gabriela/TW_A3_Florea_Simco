@@ -59,6 +59,31 @@ class Auth {
         };
     }
 
+    static async getCurrentAccountReviews(token) {
+        const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+        if (!decoded) {
+            throw new Error('Invalid token');
+        }
+        console.log("username ", decoded.username);
+        const result = await MariaDBConnection.query('SELECT r.*, p.image_url FROM reviews r JOIN products p ON r.product_id = p.id WHERE r.username = ?', [decoded.username]);
+        
+        if (result.length === 0) {
+            return null;
+        }
+
+        const reviews = result.map(user => ({
+            username: user.username,
+            rating: user.rating,
+            comment: user.comment,
+            created_on: user.created_on,
+            image_url: user.image_url,
+            product_id: user.product_id
+        }));
+    
+        return reviews;
+    }
+    
+
     static async getCurrentGardenData(token){
         const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
         if(!decoded) {
