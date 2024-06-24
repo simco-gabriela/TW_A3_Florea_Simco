@@ -133,14 +133,23 @@ REPLACE INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `added_on`) VALU
 CREATE TABLE IF NOT EXISTS `gardens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
   `created_on` date NOT NULL,
+  `longitude` float DEFAULT NULL,
+  `latitude` float DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `image` varchar(50) DEFAULT NULL,
+  `flower_type` varchar(50) DEFAULT NULL,
+  `color_type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_gardens_user_id` (`user_id`),
   CONSTRAINT `FK_gardens_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
--- Dumping data for table webgardening.gardens: ~0 rows (approximately)
+-- Dumping data for table webgardening.gardens: ~1 rows (approximately)
+REPLACE INTO `gardens` (`id`, `user_id`, `username`, `name`, `created_on`, `longitude`, `latitude`, `description`, `image`, `flower_type`, `color_type`) VALUES
+	(1, 7, 'abc', 'test', '2024-06-24', 27.609, 47.1771, 'Here is the garden for my plantation of yellow tulips.', 'images/flower-example-tulip.jpg', 'tulip', 'yellow');
 
 -- Dumping structure for table webgardening.inbox
 CREATE TABLE IF NOT EXISTS `inbox` (
