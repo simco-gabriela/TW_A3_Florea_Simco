@@ -79,3 +79,17 @@ th:last-child{
 ul{
     list-style-type: none;
 }
+.button {
+    background-color: #f8c1e0; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px; /* Adds space between the table and the button */
+
+}
