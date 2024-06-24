@@ -68,7 +68,7 @@ class Auth {
         console.log("user id: ", decoded.id);
         const result = await MariaDBConnection.query('SELECT * FROM gardens WHERE username = ?', [decoded.username]);
         if (result.length === 0) {
-            throw new Error('User not found');
+            return null
         }
         const garden = result[0];
         return { 
@@ -79,7 +79,8 @@ class Auth {
             description: garden.description,
             image: garden.image,
             color: garden.color_type,
-            flower: garden.flower_type
+            flower: garden.flower_type,
+            is_shop: garden.is_shop
         };
     }
 

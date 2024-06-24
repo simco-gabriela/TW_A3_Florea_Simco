@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post your product</title>
+    <link rel="stylesheet" href="css/product-create.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="icon" href="images/flower_icon_bar.png">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="product-container">
+        <div class="product-title">
+            <input type="text" id="productTitle" placeholder="Enter product title">
+        </div>
+        <div class="product-price">
+            <input type="number" id="productPrice" placeholder="Enter your price in dollars" step="0.01" min="0">
+        </div>
+        <div class="product-post">
+            <form id="productDescription">
+                <textarea id="productContent" placeholder="Write a description here..."></textarea>
+                <a href="my-garden.html" class="postButton">Post</a>
+            </form>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script src="js/navbar_and_footer.js"></script>
+</body>
+</html>

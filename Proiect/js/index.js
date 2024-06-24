@@ -904,7 +904,7 @@ const server = http.createServer(function(request, response) {
             serveShop(request, response);
         } else if (pathname === '/blog-page.html') {
             serveBlogPage(request, response);
-        } else if (request.url.startsWith('/blog')) {
+        } else if (request.url.startsWith('/blog.html')) {
             serveBlog(request, response);
         } else if (parsedUrl.pathname === '/product-detail.html') {
             serveProductDetailPage(request, response);

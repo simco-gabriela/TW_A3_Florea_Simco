@@ -5,6 +5,7 @@ const SOIL_MOISTURE_TAG = document.querySelector('#soil-moisture-sensor');
 const DESCRIPTION_TAG = document.querySelector('#garden-description');
 const TIP1_TAG = document.querySelector('#tip1');
 const TIP2_TAG = document.querySelector('#tip2');
+const SHOP_BUTTON_TAG = document.querySelector('#shop-button')
 
 function populateGardenData(data) {
     DESCRIPTION_TAG.textContent = data.description;
@@ -12,6 +13,9 @@ function populateGardenData(data) {
     const latitude = data.latitude;
     const longitude = data.longitude;
 
+    if(data.is_shop.data[0] == 1){
+        SHOP_BUTTON_TAG.style.display = 'none';
+    }
     displayFlowerStage(data.image, data.color);
 
     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,weathercode,soil_moisture_0_1cm`;
@@ -224,6 +228,9 @@ function setGardenData() {
         })
         .then(data => {
             console.log('Server response:', data);
+            if(!data) {
+                window.location.href = 'garden-create.html';
+            }
             if (data.error) {
                 console.error('Account error:', data.error);
                 // Handle specific error cases if needed
@@ -241,7 +248,6 @@ function setGardenData() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('test');
     setGardenData();
 });
 

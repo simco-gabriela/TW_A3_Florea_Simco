@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create your garden</title>
+    <link rel="stylesheet" href="css/garden-create.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="icon" href="images/flower_icon_bar.png">
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="garden-container">
+        <h1>You dont have a garden but you can create one now!</h1>
+        <div class="garden-title">
+            <input type="text" id="gardenTitle" placeholder="Enter your latitude...">
+            <input type="text" id="gardenTitle" placeholder="Enter your longitude...">
+            <input type="text" id="gardenTitle" placeholder="Enter your flower type...">
+            <input type="text" id="gardenTitle" placeholder="Enter your flower color...">
+        </div>
+        <div class="garden-image">
+            <p>Add an image</p>
+            <input type="file" id="gardenImage" accept="image/*">
+        </div>
+        <div class="garden-post">
+            <form id="gardenDescription">
+                <textarea id="gardenContent" placeholder="Write a description here..."></textarea>
+                <a href="my-garden.html" class="postButton">Post</a>
+            </form>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script src="js/navbar_and_footer.js"></script>
+</body>
+</html>
