@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const MariaDBConnection = require('./db.js');
+const { title } = require('process');
 const SECRET_KEY = 'XDD';
 
 
@@ -36,7 +37,7 @@ class Auth {
         return { message: 'Signin successful!', token: jwt.sign({ username: user.username }, SECRET_KEY, { algorithm: 'HS256' }) };
     }
     
-    
+
     static async getCurrentAccountData(token){
         const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
         if(!decoded) {
@@ -152,6 +153,25 @@ class Auth {
         };
     }
 
+    static async getCurrentAccountBlogs(token){
+        const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+        if(!decoded) {
+            throw new Error('Invalid token');
+        }
+
+        console.log(decoded.username);
+        const result = await MariaDBConnection.query('SELECT b.* FROM blogs b JOIN users u ON b.author_id = u.id WHERE u.username = ?;', [decoded.username]);
+        if (result.length === 0) {
+            throw new Error('User not found');
+        }
+        const user = result[0];
+        return { 
+            id: user.id,
+            title: user.title,
+            description: user.description,
+            image: user.image_url
+        };
+    }
 
     static async signup(username, name, email, password) {
         const passwordHash = this.hashPassword(password);

@@ -21,20 +21,25 @@ header {
     height: 60px;
 }
 
+.menu {
+    display: flex;
+}
+
 .menu ul {
     list-style-type: none;
     display: flex;
+    padding: 0;
+    align-items: center;
 }
 
 .menu li {
     padding: 0 15px;
-    position: relative; 
+    position: relative;
 }
 
 .menu li a {
     color: black;
     text-decoration: none;
-    display: block; 
 }
 
 .menu li.submenu ul {
@@ -43,8 +48,7 @@ header {
     background-color: #f8c1e0;
     padding: 10px;
     list-style-type: none;
-    margin-top: 5px;
-    left: 0; 
+    left: 0;
     min-width: 200px;
 }
 

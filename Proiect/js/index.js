@@ -1035,7 +1035,7 @@ const server = http.createServer(function(request, response) {
             serveShop(request, response);
         } else if (pathname === '/blog-page.html') {
             serveBlogPage(request, response);
-        } else if (request.url.startsWith('/blog')) {
+        } else if (request.url.startsWith('/blog.html')) {
             serveBlog(request, response);
         } else if (parsedUrl.pathname === '/product-detail.html') {
             serveProductDetailPage(request, response);
@@ -1253,7 +1253,22 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: 'Server error' }));
                 }
             });
-        } else {
+        } else if (request.method === 'POST' && request.url === '/get-my-blogs') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const { token } = JSON.parse(data);
+                    console.log('test');
+                    const result = await Auth.getCurrentAccountBlogs(token);
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify(result));
+                    console.log(result);
+                } catch (error) {
+                    console.error('Sign-in error:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ error: 'Server error' }));
+                }
+            });
+        }else {
             serveStaticFiles(request, response);
         }
     } catch (error) {
