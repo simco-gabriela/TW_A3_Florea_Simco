@@ -949,7 +949,22 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: 'Server error' }));
                 }
             });
-        }else {
+        } else if (request.method === 'POST' && request.url === '/get-my-garden') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const {token} = JSON.parse(data);
+                    console.log('test');
+                    const result = await Auth.getCurrentGardenData(token);
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify(result));
+                } catch (error) {
+                    console.error('Sign-in error:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ error: 'Server error' }));
+                }
+            });
+        }
+        else {
             serveStaticFiles(request, response);
         }
     } catch (error) {

@@ -14,43 +14,42 @@
     <div id="navbar"></div>
 
     <div class="my-garden-container">
-        <div class="garden-header">
-            <h1>My Garden</h1>
-        </div>
         <div class="garden-main">
             <div class="garden-image">
-                <img src="images/flower-example.jpg" alt="Garden Image">
+                <canvas id="canvas"></canvas>
             </div>
             <div class="garden-text">
-                <h2>Welcome to Your Garden</h2>
-                <p>This is where you can manage and view all the details of your personal garden. Keep track of your plants, sensors, and more.</p>
-                <p>Enjoy nurturing your green space and making it flourish!</p>
-                <a href="shop.html" class="shop-button">Shop for More Plants</a>
+                <h2>Welcome to Your Garden!</h2>
+                <p id ='garden-description'>Default value</p>
+                <h2>Here are some tips that might help you!</h2>
+                <p id="tip1">Default value</p>
+                <p id="tip2">Default value</p>
             </div>
         </div>
     </div>
 
-    <div class="sensors-container">
-        <div class="sensor-panel">
-            <h4>Sensor 1</h4>
-            <p>Details about Sensor 1</p>
+    <div id="weatherData" class="sensors-container">
+        <div id="temperature-sensor" class="sensor-panel">
+            <h4>Temperature</h4>
+            <p>Details about temperature</p>
         </div>
-        <div class="sensor-panel">
-            <h4>Sensor 2</h4>
-            <p>Details about Sensor 2</p>
+        <div id="humidity-sensor"  class="sensor-panel">
+            <h4>Humidity</h4>
+            <p>Details about humidity</p>
         </div>
-        <div class="sensor-panel">
-            <h4>Sensor 3</h4>
-            <p>Details about Sensor 3</p>
+        <div id="weather-sensor" class="sensor-panel">
+            <h4>Weather</h4>
+            <p>Details about weather</p>
         </div>
-        <div class="sensor-panel">
-            <h4>Sensor 4</h4>
-            <p>Details about Sensor 4</p>
+        <div id="soil-moisture-senso" class="sensor-panel">
+            <h4>Soil moisture</h4>
+            <p>Details about soil moisture</p>
         </div>
     </div>
 
     <div id="footer"></div>
 
+    <script src = "js/my-garden.js"> </script>
     <script src = "js/navbar_and_footer.js"> </script>
 </body>
 

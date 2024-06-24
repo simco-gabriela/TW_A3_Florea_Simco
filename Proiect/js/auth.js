@@ -59,6 +59,31 @@ class Auth {
         };
     }
 
+    static async getCurrentGardenData(token){
+        const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+        if(!decoded) {
+            throw new Error('Invalid token');
+        }
+        console.log("username ", decoded.username);
+        console.log("user id: ", decoded.id);
+        const result = await MariaDBConnection.query('SELECT * FROM gardens WHERE username = ?', [decoded.username]);
+        if (result.length === 0) {
+            throw new Error('User not found');
+        }
+        const garden = result[0];
+        return { 
+            name: garden.name,
+            created_on: garden.created_on,
+            latitude: garden.latitude,
+            longitude: garden.longitude,
+            description: garden.description,
+            image: garden.image,
+            color: garden.color_type,
+            flower: garden.flower_type
+        };
+    }
+
+
     static async signup(username, name, email, password) {
         const passwordHash = this.hashPassword(password);
         await MariaDBConnection.query(
