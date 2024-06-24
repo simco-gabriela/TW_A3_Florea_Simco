@@ -15,7 +15,7 @@
 
     <div class="payment-container">
         <h2>Payment Details</h2>
-        <form>
+        <form id="payment-form">
             <div class="form-group">
                 <label for="fname">First Name</label>
                 <input type="text" id="fname" name="firstname" placeholder="Your first name..">
@@ -78,6 +78,56 @@
     <div id="footer"></div>
 
     <script src = "js/navbar_and_footer.js"> </script>
+    <script>
+document.getElementById('payment-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Get the token from localStorage
+    const token = localStorage.getItem('jwtToken');
+
+    // Basic credit card validation
+    var ccNum = document.getElementById('ccnum').value;
+    if(ccNum.length != 16) {
+        alert('Please enter a valid 16-digit credit card number');
+        return;
+    }
+
+    const formData = {
+        token, // Include the token in the formData sent to the server
+        firstName: document.getElementById('fname').value,
+        lastName: document.getElementById('lname').value,
+        email: document.getElementById('email').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zip: document.getElementById('zip').value,
+        cardNumber: ccNum,
+        expMonth: document.getElementById('expmonth').value,
+        expYear: document.getElementById('expyear').value,
+        cvv: document.getElementById('cvv').value
+    };
+
+    fetch('/submit-payment', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    }).then(response => response.json())
+      .then(data => {
+          if(data.success) {
+              alert('Order submitted successfully!');
+              window.location.href = 'shop.html'; // Redirect to the shop page
+          } else {
+              alert('Failed to submit order: ' + data.message);
+          }
+      });
+});
+
+
+
+        </script>
+        
 </body>
 
 </html>
