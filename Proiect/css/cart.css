@@ -80,7 +80,7 @@ ul{
     list-style-type: none;
 }
 .button {
-    background-color: #f8c1e0; 
+    background-color: #f8c1e0; /* A pink shade */
     color: white;
     border: none;
     padding: 10px 20px;
