@@ -12,24 +12,63 @@
     <div id="navbar"></div>
 
     <div class="blog-container">
-        <div class="blog-title">
-            <input type="text" id="blogTitle" placeholder="Enter your blog title...">
-        </div>
-        <div class="blog-image">
-            <p>Add an image</p>
-            <input type="file" id="blogImage" accept="image/*">
-        </div>
-        <div class="blog-post">
-            <form id="blogForm">
-                <textarea id="blogContent" placeholder="Write your blog post here..."></textarea>
-                <a href="my-blogs.html" class="postButton">Post</a>
-            </form>
-        </div>
-        <div class="blog-tags">
-            <input type="text" id="blogTags" placeholder="Enter tags (comma separated)...">
-        </div>
+        <form id="blogForm" method="POST" action="/create-blog">
+            <div class="blog-title">
+                <input type="text" id="blogTitle" name="title" placeholder="Enter your blog title...">
+            </div>
+            <div class="blog-image">
+                <p>Add image path</p>
+                <input type="text" id="blogImage" name="image" placeholder="Enter image path...">
+            </div>
+            <div class="blog-post">
+                <textarea id="blogContent" name="content" placeholder="Write your blog post here..."></textarea>
+            </div>
+            <div class="blog-tags">
+                <input type="text" id="blogTags" name="tags" placeholder="Enter tags (comma separated)...">
+                <button type="submit" class="postButton">Post</button>
+            </div>
+        </form>
     </div>
     <div id="footer"></div>
     <script src="js/navbar_and_footer.js"></script>
+    <script>
+    document.getElementById('blogForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const title = document.getElementById('blogTitle').value;
+        const image = document.getElementById('blogImage').value;
+        const content = document.getElementById('blogContent').value;
+        const tags = document.getElementById('blogTags').value.split(',').map(tag => tag.trim()); // Assuming tags are comma-separated
+        const token = localStorage.getItem('jwtToken'); // Make sure this name matches how it's stored
+
+        console.log('Sending JWT Token:', token); // Check what's being sent
+
+        if (!token) {
+            alert('Authentication token not found, please sign in again.');
+            return;
+        }
+
+        fetch('/create-blog', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, image, content, tags, token })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Blog posted successfully!');
+                window.location.href = 'my-blogs.html';
+            } else {
+                alert('Failed to post blog: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Error posting blog: ' + error.message);
+        });
+    });
+
+    </script>
 </body>
 </html>
