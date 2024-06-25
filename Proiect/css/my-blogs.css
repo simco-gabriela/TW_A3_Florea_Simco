@@ -30,16 +30,16 @@ body {
 
 .create-blog-btn {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #333;
     color: white;
-    border: none;
+    border: none;   
     cursor: pointer;
     text-decoration: none;
     font-size: 1rem;
 }
 
 .create-blog-btn:hover {
-    background-color: #0056b3;
+    background-color: #f7c7e2;
 }
 
 .create-blog-btn-right {
@@ -47,7 +47,7 @@ body {
     right: 20px;
     bottom: 20px;
     padding: 15px 30px;
-    background-color: #007bff;
+    background-color: #f7c7e2;
     color: white;
     border: none;
     cursor: pointer;
@@ -57,7 +57,7 @@ body {
 }
 
 .create-blog-btn-right:hover {
-    background-color: #0056b3;
+    background-color: #f7c7e2;
 }
 
 .main-content {
@@ -102,7 +102,7 @@ body {
 }
 
 .read-more-btn {
-    background-color: #5cb85c;
+    background-color: #333;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -112,7 +112,7 @@ body {
 }
 
 .read-more-btn:hover {
-    background-color: #449d44;
+    background-color: #f7c7e2;
 }
 
 @media (max-width: 768px) {
