@@ -60,6 +60,7 @@ class Auth {
         };
     }
 
+    
     static async getCurrentAccountReviews(token) {
         const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
         if (!decoded) {
@@ -133,13 +134,16 @@ class Auth {
         if(!decoded) {
             throw new Error('Invalid token');
         }
-        console.log("username ", decoded.username);
-        console.log("user id: ", decoded.id);
-        const result = await MariaDBConnection.query('SELECT * FROM gardens WHERE username = ?', [decoded.username]);
-        if (result.length === 0) {
-            return null
+        const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
+        if (userResult.length === 0) {
+            throw new Error('User not found');
         }
-        const garden = result[0];
+        const userId = userResult[0].id;
+        const gardenResult = await MariaDBConnection.query('SELECT * FROM gardens WHERE user_id = ?', [userId]);
+        if (gardenResult.length === 0) {
+            return null; // No garden found for this user
+        }
+        const garden = gardenResult[0];
         return { 
             name: garden.name,
             created_on: garden.created_on,
@@ -152,25 +156,30 @@ class Auth {
             is_shop: garden.is_shop
         };
     }
-
     static async getCurrentAccountBlogs(token){
         const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
-        if(!decoded) {
+        if (!decoded) {
             throw new Error('Invalid token');
         }
-
+    
         console.log(decoded.username);
-        const result = await MariaDBConnection.query('SELECT b.* FROM blogs b JOIN users u ON b.author_id = u.id WHERE u.username = ?;', [decoded.username]);
+        const result = await MariaDBConnection.query(
+            `SELECT b.id, b.title, b.description, b.image_url 
+             FROM blogs b 
+             JOIN users u ON b.author_id = u.id 
+             WHERE u.username = ?`, [decoded.username]
+        );
+    
         if (result.length === 0) {
-            throw new Error('User not found');
+            throw new Error('No blogs found');
         }
-        const user = result[0];
-        return { 
-            id: user.id,
-            title: user.title,
-            description: user.description,
-            image: user.image_url
-        };
+    
+        return result.map(blog => ({
+            id: blog.id,
+            title: blog.title,
+            description: blog.description,
+            image: blog.image_url
+        }));
     }
 
     static async signup(username, name, email, password) {
@@ -182,6 +191,7 @@ class Auth {
                 [username, name, email, passwordHash]
             );
 
+            // Retrieve the user ID using the email
             const userResult = await MariaDBConnection.query(
                 'SELECT id FROM users WHERE email = ?',
                 [email]
