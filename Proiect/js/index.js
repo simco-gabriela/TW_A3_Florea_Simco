@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY = 'XDD';
 
 
+
 // Router functions
 function serveCSS(request, response) {
     if (request.url.endsWith('.css')) {
@@ -978,6 +979,19 @@ function authorizePayment(cardNumber, cvv, expMonth, expYear) {
 }
 
 
+async function getOrCreateTagId(tagName) {
+    const existingTag = await MariaDBConnection.query('SELECT id FROM tags WHERE name = ?', [tagName]);
+    if (existingTag.length > 0) {
+        return existingTag[0].id;
+    } else {
+        const insertTag = await MariaDBConnection.query('INSERT INTO tags (name) VALUES (?)', [tagName]);
+        return insertTag.insertId;
+    }
+}
+
+
+
+
 
 
 function serveStaticFiles(request, response) {
@@ -1017,7 +1031,6 @@ function serveStaticFiles(request, response) {
 }
 
 
-
 const server = http.createServer(function(request, response) {
     const parsedUrl = url.parse(request.url, true); // True to parse query as object
     const pathname = parsedUrl.pathname; // Get the path without query string
@@ -1035,7 +1048,63 @@ const server = http.createServer(function(request, response) {
             serveShop(request, response);
         } else if (pathname === '/blog-page.html') {
             serveBlogPage(request, response);
-        } else if (request.url.startsWith('/blog')) {
+        }  else if (request.method === 'POST' && pathname === '/create-blog') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const { title, image, content, tags, token } = JSON.parse(data);
+                    console.log("Received data for blog creation:", { title, image, content, tags, token });
+        
+                    if (!token) {
+                        throw new Error('JWT must be provided');
+                    }
+        
+                    const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+                    const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
+        
+                    if (userResult.length === 0) {
+                        throw new Error('User not found');
+                    }
+        
+                    const userId = userResult[0].id;
+        
+                    // Insert the blog into the database
+                    const insertResult = await MariaDBConnection.query(
+                        'INSERT INTO blogs (title, content, image_url, author_id, date, description) VALUES (?, ?, ?, ?, NOW(), ?)',
+                        [title, content, image, userId, content.substring(0, 150)]
+                    );
+        
+                    const blogId = insertResult.insertId;
+        
+                    // Handle tags
+                    if (Array.isArray(tags)) {
+                        const tagList = tags.map(tag => tag.trim());
+                        for (const tag of tagList) {
+                            let tagId;
+        
+                            // Check if the tag already exists
+                            const existingTag = await MariaDBConnection.query('SELECT id FROM tags WHERE name = ?', [tag]);
+                            if (existingTag.length > 0) {
+                                tagId = existingTag[0].id;
+                            } else {
+                                // Insert new tag if it does not exist
+                                const tagInsertResult = await MariaDBConnection.query('INSERT INTO tags (name) VALUES (?)', [tag]);
+                                tagId = tagInsertResult.insertId;
+                            }
+        
+                            // Link tag to blog
+                            await MariaDBConnection.query('INSERT INTO blogs_tags (blog_id, tag_id) VALUES (?, ?)', [blogId, tagId]);
+                        }
+                    }
+        
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: true, message: 'Blog created successfully' }));
+                } catch (error) {
+                    console.error('Error creating blog:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: false, message: error.message }));
+                }
+            });
+        } else if (request.url.startsWith('/blog') && request.url != '/blog-create.html') {
             serveBlog(request, response);
         } else if (parsedUrl.pathname === '/product-detail.html') {
             serveProductDetailPage(request, response);
@@ -1095,31 +1164,6 @@ const server = http.createServer(function(request, response) {
                     console.error('Error removing from cart:', error);
                     response.writeHead(500, { 'Content-Type': 'application/json' });
                     response.end(JSON.stringify({ success: false, message: 'Failed to remove item from cart' }));
-                }
-            });
-        } else if (request.method === 'POST' && pathname === '/update-cart') {
-            collectRequestData(request, async (data) => {
-                try {
-                    const { productId, quantity, token } = JSON.parse(data);
-                    const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
-                    if (!decoded) {
-                        throw new Error('Invalid token');
-                    }
-        
-                    const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
-                    if (userResult.length === 0) {
-                        throw new Error('User not found');
-                    }
-                    const userId = userResult[0].id;
-        
-                    await MariaDBConnection.query('UPDATE cart SET quantity = ? WHERE user_id = ? AND product_id = ?', [quantity, userId, productId]);
-        
-                    response.writeHead(200, { 'Content-Type': 'application/json' });
-                    response.end(JSON.stringify({ success: true, message: 'Cart updated' }));
-                } catch (error) {
-                    console.error('Error updating cart:', error);
-                    response.writeHead(500, { 'Content-Type': 'application/json' });
-                    response.end(JSON.stringify({ success: false, message: 'Failed to update cart' }));
                 }
             });
         } else if (request.method === 'POST' && pathname === '/cart.html') {
@@ -1253,7 +1297,34 @@ const server = http.createServer(function(request, response) {
                     response.end(JSON.stringify({ error: 'Server error' }));
                 }
             });
-        }  else if (request.method === 'POST' && request.url === '/get-my-blogs') {
+        } else if (request.method === 'POST' && request.url === '/create-garden') {
+            collectRequestData(request, async (data) => {
+                try {
+                    const { token, name, latitude, longitude, description, image, flowerType, colorType } = JSON.parse(data);
+                    const decoded = jwt.verify(token, SECRET_KEY, { algorithms: ['HS256'] });
+                    const userResult = await MariaDBConnection.query('SELECT id FROM users WHERE username = ?', [decoded.username]);
+                    if (userResult.length === 0) {
+                        throw new Error('User not found');
+                    }
+                    const userId = userResult[0].id;
+        
+                    // Insert the garden into the database
+                    await MariaDBConnection.query(
+                        'INSERT INTO gardens (user_id, username, name, created_on, latitude, longitude, description, image, flower_type, color_type, is_shop) VALUES (?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, 0)',
+                        [userId, decoded.username, name, latitude, longitude, description, image, flowerType, colorType]
+                    );
+        
+                    response.writeHead(200, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: true, message: 'Garden created successfully, analyzing...' }));
+                } catch (error) {
+                    console.error('Error creating garden:', error);
+                    response.writeHead(500, { 'Content-Type': 'application/json' });
+                    response.end(JSON.stringify({ success: false, message: error.message }));
+                }
+            });
+        }
+        
+         else if (request.method === 'POST' && request.url === '/get-my-blogs') {
             collectRequestData(request, async (data) => {
                 try {
                     const { token } = JSON.parse(data);
