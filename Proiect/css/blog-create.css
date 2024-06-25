@@ -6,14 +6,12 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
     background-color: #f7f7f7;
 }
 
 .blog-container {
     display: flex;
-    flex-direction: column; /* Adjusted to column for stacking elements */
+    flex-direction: column;
     align-items: center;
     max-width: 1000px;
     margin: 20px auto;
@@ -25,7 +23,7 @@ body {
 .blog-post,
 .blog-tags {
     width: 100%;
-    max-width: 800px;
+    max-width: 600px; 
     margin-bottom: 20px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -35,13 +33,12 @@ body {
 }
 
 .blog-title input[type="text"],
-.blog-image input[type="file"],
+.blog-image input[type="text"],
 .blog-tags input[type="text"] {
     width: 100%;
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ddd;
-    margin-bottom: 10px;
 }
 
 .blog-image {
@@ -50,35 +47,33 @@ body {
     align-items: center;
 }
 
-.blog-post form {
-    margin-bottom: 20px;
-}
-
 .blog-post textarea {
     width: 100%;
     min-height: 200px;
     padding: 10px;
     font-size: 1rem;
-    margin-bottom: 10px;
+    margin-bottom: 20px; /* Increased margin     to separate button */
     resize: vertical;
     border: 1px solid #ddd;
 }
 
 .postButton {
+    width: auto; /* Set width to auto to only take as much space as needed */
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #333;
     color: white;
     border: none;
     cursor: pointer;
     text-decoration: none;
     font-size: 1rem;
-}
+    margin: 0 auto; /* Center the button */
+    display: block; /* Needed to enable margin auto to work */
+}   
 
 .postButton:hover {
-    background-color: #0056b3;
+    background-color: #f7c7e2;
 }
 
-/* Responsive adjustments */
 @media (max-width: 1024px) {
     .blog-post textarea {
         min-height: 150px;
