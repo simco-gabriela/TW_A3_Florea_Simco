@@ -251,3 +251,33 @@ document.addEventListener('DOMContentLoaded', function () {
     setGardenData();
 });
 
+document.getElementById('gardenForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById('gardenName').value;
+    const latitude = document.getElementById('gardenLatitude').value;
+    const longitude = document.getElementById('gardenLongitude').value;
+    const description = document.getElementById('gardenDescription').value;
+    const image = document.getElementById('gardenImage').value;
+    const flower_type = document.getElementById('flowerType').value;
+    const color_type = document.getElementById('colorType').value;
+    const token = localStorage.getItem('jwtToken'); // Assuming the JWT token is stored in localStorage
+
+    fetch('/create-garden', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, latitude, longitude, description, image, flower_type, color_type, token })
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        if (data.success) {
+            window.location.href = `my-garden.html?gardenId=${data.gardenId}`; // Redirect to the new garden page
+        }
+    })
+    .catch(error => {
+        alert('Error creating garden: ' + error.message);
+    });
+});
