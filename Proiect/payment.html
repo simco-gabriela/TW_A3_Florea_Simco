@@ -107,6 +107,7 @@ document.getElementById('payment-form').addEventListener('submit', function(even
         cvv: document.getElementById('cvv').value
     };
 
+    // Fetch call to your server to submit payment info and handle cart/order logic
     fetch('/submit-payment', {
         method: 'POST',
         headers: {
