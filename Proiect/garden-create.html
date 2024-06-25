@@ -12,25 +12,27 @@
     <div id="navbar"></div>
 
     <div class="garden-container">
-        <h1>You dont have a garden but you can create one now!</h1>
-        <div class="garden-title">
-            <input type="text" id="gardenTitle" placeholder="Enter your latitude...">
-            <input type="text" id="gardenTitle" placeholder="Enter your longitude...">
-            <input type="text" id="gardenTitle" placeholder="Enter your flower type...">
-            <input type="text" id="gardenTitle" placeholder="Enter your flower color...">
-        </div>
-        <div class="garden-image">
-            <p>Add an image</p>
-            <input type="file" id="gardenImage" accept="image/*">
-        </div>
-        <div class="garden-post">
-            <form id="gardenDescription">
+        <h1>You don't have a garden but you can create one now!</h1>
+        <form id="gardenForm">
+            <div class="garden-title">
+                <input type="text" id="gardenName" placeholder="Enter your garden name...">
+                <input type="text" id="gardenLatitude" placeholder="Enter your latitude...">
+                <input type="text" id="gardenLongitude" placeholder="Enter your longitude...">
+                <input type="text" id="gardenFlowerType" placeholder="Enter your flower type...">
+                <input type="text" id="gardenColorType" placeholder="Enter your flower color...">
+            </div>
+            <div class="garden-image">
+                <p>Add an image path</p>
+                <input type="text" id="gardenImagePath" placeholder="Enter image path...">
+            </div>
+            <div class="garden-post">
                 <textarea id="gardenContent" placeholder="Write a description here..."></textarea>
-                <a href="my-garden.html" class="postButton">Post</a>
-            </form>
-        </div>
+            </div>
+            <button type="submit" class="postButton">Post</button>
+        </form>
     </div>
     <div id="footer"></div>
     <script src="js/navbar_and_footer.js"></script>
+    <script src="js/garden-create.js"></script> 
 </body>
 </html>
